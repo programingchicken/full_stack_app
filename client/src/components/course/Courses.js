@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ItemList from './ItemList';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { add } from '@fortawesome/free-solid-svg-icons' // <-- import styles to be used
 
 class Courses extends Component {
 
@@ -43,7 +44,7 @@ const items = fullArray.map(elm => <ItemList item={elm}/>)
         return (
             <div className="bounds">
                 <div className="grid-33 centered signin">
-                    <div style={styles.fix}><div style={styles.aDiv}>{items}<a type="button" href='/course/create' style={styles.aButtons2}><span style={styles.aButtons3}>New Course</span></a></div></div>
+                    <div style={styles.fix}><div style={styles.aDiv}>{items}<a type="button" href='/course/create' style={styles.aButtons2}><span style={styles.aButtons3}> + New Course</span></a></div></div>
                 </div>
             </div>
         );
