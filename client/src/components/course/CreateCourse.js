@@ -3,29 +3,37 @@ import Form from '../Form';
 
 
 class CreateCourse extends Component {
+
     state = {
-        courseTitle: '',
-        courseDescription: '',
+        title: '',
+        description: '',
         estimatedTime: '',
         materialsNeeded: '',
         userId: '',
+        user: '',
+        hashPass: '',
         errors: [],
     }
 
     componentDidMount() {
         const { context } = this.props;
         const auth = context.authenticatedUser
+        const hashPass = context.hashPass
+        console.log(hashPass)
            this.setState({
-            userId: auth.id
+            userId: auth.id,
+            user: auth,
+            hashPass: hashPass,
         })
     }
 
     render() {
         const {
-            courseTitle,
-            courseDescription,
+            title,
+            description,
             estimatedTime,
             materialsNeeded,
+            user,
             errors,
         } = this.state;
 
@@ -40,34 +48,51 @@ class CreateCourse extends Component {
                         submitButtonText="Create Course"
                         elements={() => (
                             <React.Fragment>
+                                <div style={{display: 'inline-flex'}}>
+                                <div style={styles.div1}>
+                                <label for="title" style={styles.title2} >Course Title</label>
                                 <input
-                                    id="courseTitle"
-                                    name="courseTitle"
+                                    id="title"
+                                    name="title"
                                     type="text"
-                                    value={courseTitle}
+                                    value={title}
                                     onChange={this.change}
-                                    placeholder="Course Title" />
+                                    placeholder='Course Title...' 
+                                    style={styles.title}/>
+
+                                <span style={styles.name}>By: {user.name}</span>
+                                <label for="description" style={styles.description2} >Course Description</label>
                                 <textarea
-                                    id="courseDescription"
-                                    name="courseDescription"
-                                    value={courseDescription}
+
+                                    id="description"
+                                    name="description"
+                                    value={description}
                                     onChange={this.change}
-                                    placeholder="Course Description">
+                                    placeholder='Course Description...'
+                                    style={styles.description}>
                                 </textarea>
+                                </div>
+                                <div style={styles.div2}>
+                                <label for="estimatedTime" style={styles.estimatedTime2} >Estimated Time</label>
                                 <input
                                     id="estimatedTime"
                                     name="estimatedTime"
                                     type="estimatedTime"
                                     value={estimatedTime}
                                     onChange={this.change}
-                                    placeholder="Estimated Time" />
+                                    placeholder='Estimated Time...'
+                                    style={styles.estimatedTime} />
+                                <label for="materialsNeeded" style={styles.materialsNeeded2} >Materials Needed</label>
                                 <textarea
                                     id="materialsNeeded"
                                     name="materialsNeeded"
                                     value={materialsNeeded}
                                     onChange={this.change}
-                                    placeholder="Materials Needed">
+                                    placeholder='Materials List...'
+                                    style={styles.materialsNeeded} >
                                 </textarea>
+                                </div>
+                                </div>
                             </React.Fragment>
                         )} />
                 </div>
@@ -89,35 +114,35 @@ class CreateCourse extends Component {
     submit = () => {
         const { context } = this.props;
         const {
-            courseTitle,
-            courseDescription,
+            title,
+            description,
             estimatedTime,
             materialsNeeded,
             userId,
-            errors,
+            user,
+            hashPass,
         } = this.state;
 
         // Create user
         const course = {
-            courseTitle,
-            courseDescription,
+            title,
+            description,
             estimatedTime,
             materialsNeeded,
             userId,
-            errors,
         };
-
-        context.data.createCourse(course)
+console.log(hashPass)
+        context.data.createCourse(course, user.username, hashPass)
             .then(errors => {
-                if (errors.length) {
+                if (errors.length !== 0) {
                     this.setState({ errors });
                 } else {
-                    console.log(`${course.courseTitle} is successfully authenticated!`)
-                        .then(() => {
-                            this.props.history.push('/authenticated');
-                        });
+                    console.log(`${course.title} is successfully authenticated!`)
+                    this.props.history.push('/authenticatedCourse');
                 }
             })
+
+
             .catch((err) => {
                 console.log(err);
                 this.props.history.push('/error');
@@ -127,6 +152,78 @@ class CreateCourse extends Component {
 
     cancel = () => {
         this.props.history.push('/courses');
+    }
+}
+
+
+const styles = {
+div1: {
+    width: '55%',
+    height: '600px'
+},
+div2: {
+    width: '30%',
+    'margin-left': '150px',
+},
+    title: {
+        position: 'relative',
+        // left: '-45px',
+        // top: '85px',
+        // width: '75%',
+    },
+    title2: {
+        position: 'relative',
+        // left: '45px',
+        // top: '35px',
+        // width: '55%',
+    },
+    estimatedTime: {
+        position: 'relative',
+        // right: '40px',
+        // top: '-270px',
+        // width: '30%',
+    },
+    estimatedTime2: {
+        position: 'relative',
+        // left: '120px',
+        // top: '-315px',
+        // width: '30%',
+    },
+    sup: {
+        height: '70px',
+        position: 'absolute',
+        left: '50px',
+        top: '200px',
+        'margin-top': '-90px',
+    },
+    description: {
+        position: 'relative',
+        // left: '40px',
+        top: '60px',
+        // width: '55%',
+    },
+    description2: {
+        position: 'relative',
+        left: '-65px',
+        top: '60px',
+        // width: '55%',
+    },
+    materialsNeeded: {
+        position: 'relative',
+        // right: '-710px',
+        // top: '-205px',
+        // width: '30%',
+    },
+    materialsNeeded2: {
+        position: 'relative',
+        // right: '-885px',
+        // top: '-540px',
+        // width: '30%',
+    },
+    name: {
+        position: 'relative',
+        top: '20px',
+        // left: '-755px',
     }
 }
 

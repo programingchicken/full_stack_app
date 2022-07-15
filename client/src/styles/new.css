@@ -24,3 +24,19 @@
   color: #7c689b;
   padding: 15px 0 40px 10px;
 }
+.bounds {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.signin, .signup {
+  margin-top: 60px;
+  width: 100%;
+}
+
+sub,
+sup {
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}

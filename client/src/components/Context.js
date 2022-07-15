@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import Data from './Data';
-
 const Context = React.createContext(); 
+
+
+
 
 export class Provider extends Component {
 
@@ -10,17 +12,21 @@ export class Provider extends Component {
     super();
     this.data = new Data();
     this.cookie = Cookies.get('authenticatedUser');
+    this.newCookie = Cookies.get('hashPass');
 
     this.state = {
-      authenticatedUser: this.cookie ? JSON.parse(this.cookie) : null
+      authenticatedUser: this.cookie ? JSON.parse(this.cookie) : null,
+      hashPass: this.newCookie ? JSON.parse(this.newCookie) : null,
     };
   }
 
   render() {
     const { authenticatedUser } = this.state;
+    const {hashPass} = this.state;
     const value = {
       authenticatedUser,
       data: this.data,
+      hashPass,
       actions: {
         signIn: this.signIn,
         signOut: this.signOut
@@ -35,17 +41,21 @@ export class Provider extends Component {
 
   
   signIn = async (username, password) => {
+
+    console.log(password)
     const user = await this.data.getUser(username, password);
     if (user !== null) {
       this.setState(() => {
         return {
           authenticatedUser: user,
+          hashPass: password,
         };
       });
       const cookieOptions = {
         expires: 1 // 1 day
       };
       Cookies.set('authenticatedUser', JSON.stringify(user), cookieOptions);
+      Cookies.set('hashPass', password, cookieOptions);
     }
     return user;
   }
@@ -53,6 +63,8 @@ export class Provider extends Component {
   signOut = () => {
     this.setState({ authenticatedUser: null });
     Cookies.remove('authenticatedUser');
+    this.setState({ hashPass: null });
+    Cookies.remove('hashPass');
   }
 }
 

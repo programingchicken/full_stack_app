@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Form from '../Form';
+import FormSign from '../FormSign';
 
 export default class UserSignIn extends Component {
   state = {
@@ -20,8 +20,8 @@ export default class UserSignIn extends Component {
       <div className="bounds">
         <div className="grid-33 centered signin">
           <h1>Sign In</h1>
-          <Form 
-            cancel={this.cancel}
+          <FormSign 
+            cancel='Cancel'
             errors={errors}
             submit={this.submit}
             submitButtonText="Sign In"

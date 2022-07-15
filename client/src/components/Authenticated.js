@@ -7,6 +7,8 @@ import React from 'react';
     <div className="grid-100">
       <h1>{authUser.name} is authenticated!</h1>
       <p>Your username is {authUser.username}.</p>
+      <a type="button" class="button" href='/courses'>Course List</a>
+      <a type="button" class="button" href='/course/create'>Create Course</a>
     </div>
   </div>
   );

@@ -1,37 +1,58 @@
 'use strict';
 
+// load modules
+
 const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan');
-const routes = require('./routes');
 
-const sequelize = require('./db/database.js');
-const User = require('./models/User')
+const bodyParser = require('body-parser')
+const {sequelize} = require('./models');
+const routes = require('./routes')
+
+// const sequelize = require('./public/db/database.js');
+
+
+
+//// const indexRoute = require('./public/routes/Book')
 
 //Update database
-sequelize.sync({ /*Use to force the sync on database*/ force: true}).then(() => console.log('db is ready'))
 
-// Create the Express app.
+// create the Express app
 const app = express();
 
-// Enable All CORS Requests
-app.use(cors());
 
-// Setup request body JSON parsing.
-app.use(express.json());
+app.set('views', __dirname + '/views');
+app.set('view engine', 'pug');
+
+
+app.use(express.static(__dirname + '/seed'));
+app.use(bodyParser.json())
+app.use(express.urlencoded({ extend: false }));
+app.use(/*this is middle ware*/express.json());
+
+
+sequelize.authenticate(console.log('db is running'))
+sequelize.sync({ /*Use to force the sync on database*/ force: true}).then(() => console.log('db is ready'))
+// variable to enable global error logging
+const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
+
+
+
 
 // Setup morgan which gives us HTTP request logging.
 app.use(morgan('dev'));
 
-// Setup a friendly greeting for the root route.
+// Enable All CORS Requests
+app.use(cors());
+
+app.use('/api', routes);    
+// setup a friendly greeting for the root route
 app.get('/', (req, res) => {
   res.json({
-    message: 'Welcome to the REST API Authentication with Express project!',
+    message: 'Welcome to the REST API project!',
   });
 });
-
-// Add routes.
-app.use('/api', routes);
 
 // Send 404 if no other route matched.
 app.use((req, res) => {
@@ -50,10 +71,12 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Set our port.
-app.set('port', process.env.PORT || 5000);
+// set our port
+app.set('port', process.env.PORT || 8036);
 
-// Start listening on our port.
+
+
+// start listening on our port
 const server = app.listen(app.get('port'), () => {
   console.log(`Express server is listening on port ${server.address().port}`);
 });

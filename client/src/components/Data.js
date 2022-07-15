@@ -36,6 +36,8 @@ export default class Data {
       throw new Error();
     }
   }
+
+
   
   async createUser(user) {
     const response = await this.api('/users', 'POST', user);
@@ -52,8 +54,35 @@ export default class Data {
     }
   }
 
+
+  async getCourse(id, username, password) {
+    const response = await this.api(`/course/${id}`, 'GET', null, true, { username, password });
+    if (response.status === 200) {
+      return response.json().then(data => data);
+    }
+    else if (response.status === 401) {
+      return null;
+    }
+    else {
+      throw new Error();
+    }
+  }
+
+  async getAllCourse(username, password) {
+    const response = await this.api(`/courses`, 'GET', null, true, { username, password });
+    if (response.status === 200) {
+      return response.json().then(data => data);
+    }
+    else if (response.status === 401) {
+      return null;
+    }
+    else {
+      throw new Error();
+    }
+  }
+
   async createCourse(course, username, password) {
-    const response = await this.api('/course/create', 'POST', course, true, { username, password });
+    const response = await this.api('/course', 'POST', course, true, { username, password });
     if (response.status === 201) {
       return [];
     }
@@ -66,4 +95,34 @@ export default class Data {
       throw new Error();
     }
   }
+
+async updateCourse(id, course, username, password) {
+  const response = await this.api(`/course/${id}`, 'PUT', course, true, { username, password });
+  if (response.status === 204) {
+    return [];
+  }
+  else if (response.status === 400) {
+    return response.json().then(data => {
+      return data.errors;
+    });
+  }
+  else {
+    throw new Error();
+  }
+}
+
+async deleteCourse(id, course, username, password) {
+  const response = await this.api(`/course/${id}`, 'DELETE', course, true, { username, password });
+  if (response.status === 204) {
+    return [];
+  }
+  else if (response.status === 400) {
+    return response.json().then(data => {
+      return data.errors;
+    });
+  }
+  else {
+    throw new Error();
+  }
+}
 }

@@ -6,6 +6,7 @@ const form = (props) => {
     errors,
     submit,
     submitButtonText,
+    deletePage,
     elements,
   } = props;  
 
@@ -13,6 +14,7 @@ const form = (props) => {
     event.preventDefault();
     submit();
   }
+
 
   function handleCancel(event) {
     event.preventDefault();
@@ -22,11 +24,11 @@ const form = (props) => {
   return (
     <div>
       <ErrorsDisplay errors={errors} />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={styles.form}>
         {elements()}
         <div className="pad-bottom">
-          <button className="button" type="submit">{submitButtonText}</button>
-          <button className="button button-secondary" onClick={handleCancel}>Cancel</button>
+          <button className=" button" type="submit" style={styles.subm}>{submitButtonText}</button>
+          <button className="cancel button button-secondary" onClick={handleCancel } style={styles.subm2}>Cancel</button>
         </div>
       </form>
     </div>
@@ -38,7 +40,7 @@ function ErrorsDisplay({ errors }) {
 
   if (errors.length) {
     errorsDisplay = (
-      <div>
+      <div style={styles.err}>
         <h2 className="validation--errors--label">Validation errors</h2>
         <div className="validation-errors">
           <ul>
@@ -50,6 +52,27 @@ function ErrorsDisplay({ errors }) {
   }
 
   return errorsDisplay;
+}
+
+const styles = {
+subm:{
+  position: 'relative',
+  left: '40px',
+  bottom: '120px',
+
+},
+subm2:{
+  position: 'relative',
+  left: '50px',
+  bottom: '120px',
+
+},
+err: {
+  position: 'relative',
+  left: '50px',
+  top: '60px',
+  'margin-bottom': '20px',
+}
 }
 
 export default form
