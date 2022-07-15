@@ -25,21 +25,22 @@ class CourseDetail extends Component {
         console.log(id[3])
         const theCourse = await context.data.getCourse(id[3], auth.username, hashPass);
         console.log(theCourse)
-        let firstLine = theCourse.materialsNeeded.split(/\n/)
-        console.log(firstLine)
-        for (let i = 0 ; i < firstLine.length; i++) {
-            console.log(firstLine[i])
-            if (firstLine[i].charAt(0) !== '*') {
-                firstLine[i] = `*${firstLine[i]}`;
-            }
 
-
-            console.log(firstLine[i])
-        }
 
 
 
         if (theCourse) {
+            let firstLine = theCourse.materialsNeeded.split(/\n/)
+            console.log(firstLine)
+            for (let i = 0 ; i < firstLine.length; i++) {
+                console.log(firstLine[i])
+                if (firstLine[i].charAt(0) !== '*') {
+                    firstLine[i] = `*${firstLine[i]}`;
+                }
+    
+    
+                console.log(firstLine[i])
+            }
            this.setState({
             id: id[3],
             title: theCourse.title,

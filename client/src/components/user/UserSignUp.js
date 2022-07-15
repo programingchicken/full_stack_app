@@ -23,7 +23,7 @@ export default class UserSignUp extends Component {
         <div className="grid-33 centered signin">
           <h1>Sign Up</h1>
           <FormSign 
-            cancel='Cancel'
+            cancel={this.cancel}
             errors={errors}
             submit={this.submit}
             submitButtonText="Sign Up"

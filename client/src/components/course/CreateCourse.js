@@ -20,6 +20,7 @@ class CreateCourse extends Component {
         const auth = context.authenticatedUser
         const hashPass = context.hashPass
         console.log(hashPass)
+        console.log(auth)
            this.setState({
             userId: auth.id,
             user: auth,

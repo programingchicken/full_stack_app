@@ -21,7 +21,7 @@ export default class UserSignIn extends Component {
         <div className="grid-33 centered signin">
           <h1>Sign In</h1>
           <FormSign 
-            cancel='Cancel'
+            cancel={this.cancel}
             errors={errors}
             submit={this.submit}
             submitButtonText="Sign In"

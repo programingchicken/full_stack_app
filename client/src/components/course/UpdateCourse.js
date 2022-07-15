@@ -27,6 +27,8 @@ class UpdateCourse extends Component {
         console.log(theCourse)
         
 
+        if (theCourse) {
+
         let firstLine = theCourse.materialsNeeded.split(/\n/)
         console.log(firstLine)
         for (let i = 0 ; i < firstLine.length; i++) {
@@ -40,7 +42,6 @@ class UpdateCourse extends Component {
         }
 
         console.log( firstLine.join(''))
-        if (theCourse) {
            this.setState({
             id: id[3],
             title: theCourse.title,
