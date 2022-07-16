@@ -20,13 +20,15 @@ class Courses extends Component {
         const auth = context.authenticatedUser
         const hashPass = context.hashPass 
 
-        let theCourse;
+        let theCourse
         if (auth) {
-            const theCourse = await context.data.getAllCourse( auth.username, hashPass);
+            theCourse = await context.data.getAllCourse(auth.username, hashPass);
             console.log(theCourse)
-        } 
-
-        if (theCourse) {
+            console.log('poop')
+        } else {
+            this.props.history.push(`/course/notOwned`);
+        }
+            if (theCourse) {
            this.setState({
             id: theCourse.id,
             title: theCourse.title,
@@ -35,11 +37,8 @@ class Courses extends Component {
             hashPass: hashPass,
             fullArray: theCourse,
         })
-    } else {
-        this.props.history.push(`/course/notOwned`);
     }
-
-    }
+} 
 
     render() {
         const {
