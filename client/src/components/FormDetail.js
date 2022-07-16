@@ -1,5 +1,5 @@
 import React from 'react';
-
+//form for details
 const formDetail = (props) => {
   const {
     cancel,
@@ -10,6 +10,8 @@ const formDetail = (props) => {
     elements,
   } = props;  
 
+
+  //submit
   function handleSubmit(event) {
     event.preventDefault();
     submit();
@@ -17,17 +19,20 @@ const formDetail = (props) => {
 
 
 
-
+//cancel
   function handleCancel(event) {
     event.preventDefault();
     cancel();
   }
 
+  //update
   function handleUpdate(event) {
     event.preventDefault();
     update();
   }
 
+
+  //page
   return (
     <div>
       <ErrorsDisplay errors={errors} />
@@ -44,6 +49,8 @@ const formDetail = (props) => {
   );
 }
 
+
+//display errors
 function ErrorsDisplay({ errors }) {
   let errorsDisplay = null;
 
@@ -62,7 +69,7 @@ function ErrorsDisplay({ errors }) {
 
   return errorsDisplay;
 }
-
+//styles
 const styles = {
   theButton: {
     opacity: '100%',

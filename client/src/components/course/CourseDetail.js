@@ -3,7 +3,7 @@ import FormDetail from '../FormDetail';
 
 
 class CourseDetail extends Component {
-
+//org state
     state = {
         id: '',
         title: '',
@@ -16,6 +16,7 @@ class CourseDetail extends Component {
         errors: [],
     }
 
+    //mounts after
    async componentDidMount() {
         const { context } = this.props;
         const auth = context.authenticatedUser
@@ -34,7 +35,7 @@ class CourseDetail extends Component {
         } 
 
 
-
+//fixes materials text
         if (theCourse ) {
             let firstLine = theCourse.materialsNeeded.split(/\n/)
             console.log(firstLine)
@@ -46,17 +47,22 @@ class CourseDetail extends Component {
                     }
                 }
             }
+
+
+//fixes des text
             let Line = theCourse.description.split(/\r/)
             console.log(Line)
             for (let i = 0 ; i < Line.length; i++) {
                 console.log(Line[i])
-if (Line[i].length !== 0) {
-Line[i] = `${Line[i]}`;
-} else {
-Line[i] = `                                                                                                                                                                                                                  ${Line[i]}`;
-}
+                if (Line[i].length !== 0) {
+                Line[i] = `${Line[i]}`;
+                } else {
+                Line[i] = `                                                                                                                                                                                                                  ${Line[i]}`;
+                }
 
             }
+
+            //sets the state
            this.setState({
             id: id[3],
             title: theCourse.title,
@@ -72,6 +78,9 @@ Line[i] = `                                                                     
     }
     }
 
+
+
+    //page
     render() {
         const {
             title,
@@ -82,6 +91,8 @@ Line[i] = `                                                                     
             errors,
         } = this.state;
 
+
+ 
         return (
             <div className="bounds">
                 <div className="grid-33 centered signin">
@@ -139,6 +150,7 @@ Line[i] = `                                                                     
         );
     }
 
+    // change event
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -150,6 +162,8 @@ Line[i] = `                                                                     
         });
     }
 
+
+    //submit
     submit = () => {
         const { context } = this.props;
         const {
@@ -173,6 +187,7 @@ Line[i] = `                                                                     
             userId,
         };
 
+        //delete
         context.data.deleteCourse(id, course, user.username, hashPass)
             .then(errors => {
                 if (errors.length) {
@@ -190,6 +205,7 @@ Line[i] = `                                                                     
 
     }
 
+    //update page
     update = () => {
         const {
             id,
@@ -207,6 +223,8 @@ Line[i] = `                                                                     
     }
 }
 
+
+//styles
 
 const styles = {
     buttonBar: {

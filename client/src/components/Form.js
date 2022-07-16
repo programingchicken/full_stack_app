@@ -1,5 +1,5 @@
 import React from 'react';
-
+//form page
 const form = (props) => {
   const {
     cancel,
@@ -9,17 +9,21 @@ const form = (props) => {
     elements,
   } = props;  
 
+
+  //submit
   function handleSubmit(event) {
     event.preventDefault();
     submit();
   }
 
-
+//cancel
   function handleCancel(event) {
     event.preventDefault();
     cancel();
   }
 
+
+  //the page
   return (
     <div>
       <ErrorsDisplay errors={errors} />
@@ -33,7 +37,7 @@ const form = (props) => {
     </div>
   );
 }
-
+//errors val
 function ErrorsDisplay({ errors }) {
   let errorsDisplay = null;
 
@@ -53,6 +57,7 @@ function ErrorsDisplay({ errors }) {
   return errorsDisplay;
 }
 
+//styles
 const styles = {
 subm:{
   position: 'relative',

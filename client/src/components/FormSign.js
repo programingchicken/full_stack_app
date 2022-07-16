@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+//form sign in
 const formSign = (props) => {
   const {
     cancel,
@@ -9,18 +11,20 @@ const formSign = (props) => {
     elements,
   } = props;  
 
+  //submit
   function handleSubmit(event) {
     event.preventDefault();
     submit();
   }
 
 
-
+//cancel
   function handleCancel(event) {
     event.preventDefault();
     cancel();
   }
 
+  //page
   return (
     <div>
       <ErrorsDisplay errors={errors} />
@@ -35,6 +39,7 @@ const formSign = (props) => {
   );
 }
 
+//error display
 function ErrorsDisplay({ errors }) {
   let errorsDisplay = null;
 

@@ -1,5 +1,5 @@
 import React from 'react';
-
+//error Page
 const error = () => (
   <div className="bounds">
     <h1>Error</h1>

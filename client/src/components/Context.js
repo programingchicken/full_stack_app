@@ -9,6 +9,7 @@ const Context = React.createContext();
 export class Provider extends Component {
 
   constructor() {
+    //cookies
     super();
     this.data = new Data();
     this.cookie = Cookies.get('authenticatedUser');
@@ -20,6 +21,8 @@ export class Provider extends Component {
     };
   }
 
+
+  //props
   render() {
     const { authenticatedUser } = this.state;
     const {hashPass} = this.state;
@@ -39,7 +42,7 @@ export class Provider extends Component {
     );
   }
 
-  
+  //sign in func
   signIn = async (username, password) => {
 
     console.log(password)
@@ -60,6 +63,8 @@ export class Provider extends Component {
     return user;
   }
 
+
+  //signOut func
   signOut = () => {
     this.setState({ authenticatedUser: null });
     Cookies.remove('authenticatedUser');

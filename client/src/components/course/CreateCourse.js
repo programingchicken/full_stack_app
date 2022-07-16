@@ -3,7 +3,7 @@ import Form from '../Form';
 
 
 class CreateCourse extends Component {
-
+//org state
     state = {
         title: '',
         description: '',
@@ -14,7 +14,7 @@ class CreateCourse extends Component {
         hashPass: '',
         errors: [],
     }
-
+    //mounts after
     componentDidMount() {
         const { context } = this.props;
         const auth = context.authenticatedUser
@@ -28,6 +28,7 @@ class CreateCourse extends Component {
         })
     }
 
+    //page
     render() {
         const {
             title,
@@ -101,6 +102,8 @@ class CreateCourse extends Component {
         );
     }
 
+
+    //change
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -112,6 +115,8 @@ class CreateCourse extends Component {
         });
     }
 
+
+    //submit
     submit = () => {
         const { context } = this.props;
         const {
@@ -133,6 +138,8 @@ class CreateCourse extends Component {
             userId,
         };
 console.log(hashPass)
+
+//post to API
         context.data.createCourse(course, user.username, hashPass)
             .then(errors => {
                 if (errors.length !== 0) {
@@ -156,7 +163,7 @@ console.log(hashPass)
     }
 }
 
-
+//styles
 const styles = {
 div1: {
     width: '55%',

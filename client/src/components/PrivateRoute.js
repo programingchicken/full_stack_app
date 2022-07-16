@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Consumer } from './Context';
-
+//private page
 const privateRoutes = ({ component: Component, ...rest }) => {
   return (
     <Consumer>

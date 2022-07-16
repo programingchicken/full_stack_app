@@ -3,7 +3,7 @@ import ItemList from './ItemList';
 
 
 class Courses extends Component {
-
+//org state
     state = {
         id: '',
         title: '',
@@ -14,11 +14,14 @@ class Courses extends Component {
         errors: [],
     }
 
+        //mounts after
    async componentDidMount() {
         const { context } = this.props;
         const auth = context.authenticatedUser
         const hashPass = context.hashPass 
 
+
+        //checks for auth
         let theCourse
         if (auth) {
             theCourse = await context.data.getAllCourse(auth.username, hashPass);
@@ -27,6 +30,9 @@ class Courses extends Component {
         } else {
             this.props.history.push(`/course/notOwned`);
         }
+
+
+            //sets the state
             if (theCourse) {
            this.setState({
             id: theCourse.id,
@@ -39,6 +45,8 @@ class Courses extends Component {
     }
 } 
 
+
+  //page
     render() {
         const {
             fullArray,
@@ -56,7 +64,7 @@ const items = fullArray.map(elm => <ItemList key={elm.id} item={elm}/>)
     }
 
     
-
+// change text 
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -68,51 +76,17 @@ const items = fullArray.map(elm => <ItemList key={elm.id} item={elm}/>)
         });
     }
 
-    submit = () => {
-        const { context } = this.props;
-        const {
-            id,
-            title,
-            description,
-            estimatedTime,
-            materialsNeeded,
-            userId,
-            user,
-            hashPass,
-        } = this.state;
 
-        // Create user
-        const course = {
-            id,
-            title,
-            description,
-            estimatedTime,
-            materialsNeeded,
-            userId,
-        };
 
-        context.data.updateCourse(id, course, user.username, hashPass)
-            .then(errors => {
-                if (errors.length) {
-                    this.setState({ errors });
-                } else {
-                    console.log(`${course.title} is successfully authenticated!`)
-
-                            this.props.history.push('/authenticatedCourse');
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                this.props.history.push('/error');
-            });
-
-    }
-
+    //cancel
     cancel = () => {
         this.props.history.push('/courses');
     }
 }
 
+
+
+//styles
 const styles = {
 
     aButtons2: {

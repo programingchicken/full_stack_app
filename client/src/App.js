@@ -15,7 +15,7 @@ import UserSignIn from './components/user/UserSignIn';
 import UserSignOut from './components/user/UserSignOut';
 import Authenticated from './components/Authenticated';
 import CourseDetail from './components/course/CourseDetail';
-import Courses from './components/course';
+import Courses from './components/course/Courses';
 import CreateCourse from './components/course/CreateCourse';
 import UpdateCourse from './components/course/UpdateCourse';
 import AuthenticatedCourse from './components/AuthenticatedCourse';

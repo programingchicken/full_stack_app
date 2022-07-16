@@ -3,7 +3,7 @@ import Form from '../Form';
 
 
 class UpdateCourse extends Component {
-
+//org state
     state = {
         id: '',
         title: '',
@@ -16,6 +16,8 @@ class UpdateCourse extends Component {
         errors: [],
     }
 
+
+    //mounts after
    async componentDidMount() {
         const { context } = this.props;
         const auth = context.authenticatedUser
@@ -31,8 +33,9 @@ class UpdateCourse extends Component {
         } 
         
 
-        if (theCourse) {
 
+        if (theCourse) {
+//fixes materials text
         let firstLine = theCourse.materialsNeeded.split(/\n/)
         console.log(firstLine)
         for (let i = 0 ; i < firstLine.length; i++) {
@@ -45,6 +48,9 @@ class UpdateCourse extends Component {
             console.log(firstLine[i])
         }
 
+
+
+//fixes des text
         let Line = theCourse.description.split(/\n/)
         console.log(Line)
         for (let i = 0 ; i < Line.length; i++) {
@@ -54,6 +60,8 @@ class UpdateCourse extends Component {
                 }
         }
 
+
+                  //sets the state
         console.log( firstLine.join(''))
            this.setState({
             id: id[3],
@@ -69,6 +77,9 @@ class UpdateCourse extends Component {
         this.props.history.push(`/course/notOwned`);
     }
     }
+
+
+    //page
 
     render() {
         const {
@@ -142,6 +153,8 @@ class UpdateCourse extends Component {
         );
     }
 
+
+    ///change
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -153,6 +166,8 @@ class UpdateCourse extends Component {
         });
     }
 
+
+    //submit
     submit = () => {
         const { context } = this.props;
         const {
@@ -176,6 +191,8 @@ class UpdateCourse extends Component {
             userId,
         };
 
+
+        //put to the API
         context.data.updateCourse(id, course, user.username, hashPass)
             .then(errors => {
                 if (errors.length !== 0) {

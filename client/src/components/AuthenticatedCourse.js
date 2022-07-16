@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Auth course page
  const authenticatedCourse = ({ context  }) => {
   const authUser = context.authenticatedUser;
   return (

@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Auth sign in page
  const authenticated = ({ context  }) => {
   const authUser = context.authenticatedUser;
   return (

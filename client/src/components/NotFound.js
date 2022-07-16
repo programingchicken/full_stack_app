@@ -1,5 +1,5 @@
 import React from 'react';
-
+// not found page
 const notFound = () => (
   <div className="bounds">
     <h1>Not Found</h1>

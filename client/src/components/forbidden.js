@@ -1,5 +1,5 @@
 import React from 'react';
-
+// forbidden Page
 const forbidden = () => (
   <div className="bounds">
     <h1>Forbidden</h1>

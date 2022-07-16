@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 export default class Courses extends Component {
+  //main page
   render() {
     return (
       <div className="bounds">

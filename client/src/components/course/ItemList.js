@@ -1,6 +1,6 @@
 import React from "react";
 
-
+//page
 const ListItem = ({item}) => {
     console.log(item)
     return (
@@ -10,6 +10,8 @@ const ListItem = ({item}) => {
     )
 };
 
+
+//styles
 const styles = {
     aButtons: {
         padding: 70,

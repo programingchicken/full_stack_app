@@ -1,5 +1,7 @@
 import config from './config';
 
+
+//api func
 export default class Data {
   api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
     const url = config.apiBaseUrl + path;
@@ -24,6 +26,9 @@ export default class Data {
     return fetch(url, options);
   }
 
+
+
+  //get user api
   async getUser(username, password) {
     const response = await this.api(`/users`, 'GET', null, true, { username, password });
     if (response.status === 200) {
@@ -38,7 +43,7 @@ export default class Data {
   }
 
 
-  
+  //post user api
   async createUser(user) {
     const response = await this.api('/users', 'POST', user);
     if (response.status === 201) {
@@ -54,7 +59,7 @@ export default class Data {
     }
   }
 
-
+// get a Course by id
   async getCourse(id, username, password) {
     const response = await this.api(`/course/${id}`, 'GET', null, true, { username, password });
     if (response.status === 200) {
@@ -68,6 +73,9 @@ export default class Data {
     }
   }
 
+
+
+  //get all course 
   async getAllCourse(username, password) {
     const response = await this.api(`/courses`, 'GET', null, true, { username, password });
     if (response.status === 200) {
@@ -81,6 +89,7 @@ export default class Data {
     }
   }
 
+  //post Course 
   async createCourse(course, username, password) {
     const response = await this.api('/course', 'POST', course, true, { username, password });
     if (response.status === 201) {
@@ -96,6 +105,7 @@ export default class Data {
     }
   }
 
+  //put course
 async updateCourse(id, course, username, password) {
   const response = await this.api(`/course/${id}`, 'PUT', course, true, { username, password });
   if (response.status === 204) {
@@ -111,6 +121,7 @@ async updateCourse(id, course, username, password) {
   }
 }
 
+//delete course
 async deleteCourse(id, course, username, password) {
   const response = await this.api(`/course/${id}`, 'DELETE', course, true, { username, password });
   if (response.status === 204) {

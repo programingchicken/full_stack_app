@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+//header page
  class Header extends React.PureComponent {
+
+  //header
   render() {
     const { context } = this.props;
     const authUser = context.authenticatedUser;
-
+//check if auth
     let log = authUser ? 'Course' : 'MyAuth';
+
+    //page
     return (
       <div className="header">
         <div className="bounds">
