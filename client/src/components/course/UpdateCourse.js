@@ -23,8 +23,12 @@ class UpdateCourse extends Component {
         const id = window.location.pathname.split('/')
         console.log(id.length)
         console.log(id[3])
-        const theCourse = await context.data.getCourse(id[3], auth.username, hashPass);
+        
+        let theCourse;
+        if (auth) {
+         theCourse = await context.data.getCourse(id[3], auth.username, hashPass);
         console.log(theCourse)
+        } 
         
 
         if (theCourse) {

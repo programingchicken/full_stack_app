@@ -23,13 +23,19 @@ class CourseDetail extends Component {
         const id = window.location.pathname.split('/')
         console.log(id.length)
         console.log(id[3])
-        const theCourse = await context.data.getCourse(id[3], auth.username, hashPass);
+
+
+
+        
+        let theCourse;
+        if (auth) {
+         theCourse = await context.data.getCourse(id[3], auth.username, hashPass);
         console.log(theCourse)
+        } 
 
 
 
-
-        if (theCourse) {
+        if (theCourse ) {
             let firstLine = theCourse.materialsNeeded.split(/\n/)
             console.log(firstLine)
             for (let i = 0 ; i < firstLine.length; i++) {
@@ -163,7 +169,7 @@ class CourseDetail extends Component {
             .then(errors => {
                 if (errors.length) {
                     this.setState({ errors });
-                } else {
+                 } else {
                     console.log(`${course.title} is successfully Deleted!`)
 
                             this.props.history.push('/courses');

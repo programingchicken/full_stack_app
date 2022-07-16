@@ -95,7 +95,7 @@ export default class UserSignUp extends Component {
         console.log(data.length);
         if (data.length !== 0) {
           this.setState({ errors: data });
-        } else {
+      }  else {
           console.log(`${user.username} is successfully signed up and authenticated!`);
           context.actions.signIn(user.username, user.password)
             .then(() => {
