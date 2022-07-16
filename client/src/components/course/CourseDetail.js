@@ -34,8 +34,10 @@ class CourseDetail extends Component {
             console.log(firstLine)
             for (let i = 0 ; i < firstLine.length; i++) {
                 console.log(firstLine[i])
-                if (firstLine[i].charAt(0) !== '*') {
-                    firstLine[i] = `*${firstLine[i]}`;
+                if (firstLine[i].charAt(0) !== '* ') {
+                    if(firstLine[i] !== '') {
+                        firstLine[i] = `*${firstLine[i]}`;
+                    }
                 }
     
     

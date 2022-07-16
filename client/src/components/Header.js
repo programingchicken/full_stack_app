@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
   render() {
     const { context } = this.props;
     const authUser = context.authenticatedUser;
+
+    let log = authUser ? 'Course' : 'MyAuth';
     return (
       <div className="header">
         <div className="bounds">
-          <h1 className="header--logo">MyAuth</h1>
+          <h1 className="header--logo">{log}</h1>
           <nav>
             {authUser ? (
               <React.Fragment>
