@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ItemList from './ItemList';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Form from '../Form'
 import { add } from '@fortawesome/free-solid-svg-icons' // <-- import styles to be used
 
 class Courses extends Component {
@@ -19,8 +19,13 @@ class Courses extends Component {
         const { context } = this.props;
         const auth = context.authenticatedUser
         const hashPass = context.hashPass 
-        const theCourse = await context.data.getAllCourse( auth.username, hashPass);
-        console.log(theCourse)
+
+        let theCourse;
+        if (auth) {
+            const theCourse = await context.data.getAllCourse( auth.username, hashPass);
+            console.log(theCourse)
+        } 
+
         if (theCourse) {
            this.setState({
             id: theCourse.id,
@@ -31,7 +36,7 @@ class Courses extends Component {
             fullArray: theCourse,
         })
     } else {
-
+        this.props.history.push(`/course/notOwned`);
     }
 
     }
@@ -42,12 +47,14 @@ class Courses extends Component {
         } = this.state;
 const items = fullArray.map(elm => <ItemList item={elm}/>) 
         return (
-            <div className="bounds">
-                <div className="grid-33 centered signin">
-                    <div style={styles.fix}><div style={styles.aDiv}>{items}<a type="button" href='/course/create' style={styles.aButtons2}><span style={styles.aButtons3}> + New Course</span></a></div></div>
-                </div>
-            </div>
-        );
+
+                        <div className="bounds">
+                            <div className="grid-33 centered signin">
+                                <div style={styles.fix}><div style={styles.aDiv}>{items}<a type="button" href='/course/create' style={styles.aButtons2}><span style={styles.aButtons3}> + New Course</span></a></div></div>
+                            </div>
+                        </div>
+        )
+
     }
 
     
