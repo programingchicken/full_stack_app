@@ -26,7 +26,7 @@ class CourseDetail extends Component {
 
 
 
-        
+
         let theCourse;
         if (auth) {
          theCourse = await context.data.getCourse(id[3], auth.username, hashPass);
@@ -40,19 +40,27 @@ class CourseDetail extends Component {
             console.log(firstLine)
             for (let i = 0 ; i < firstLine.length; i++) {
                 console.log(firstLine[i])
-                if (firstLine[i].charAt(0) !== '* ') {
+                if (firstLine[i].charAt(0) !== '*') {
                     if(firstLine[i] !== '') {
                         firstLine[i] = `*${firstLine[i]}`;
                     }
                 }
-    
-    
-                console.log(firstLine[i])
+            }
+            let Line = theCourse.description.split(/\r/)
+            console.log(Line)
+            for (let i = 0 ; i < Line.length; i++) {
+                console.log(Line[i])
+if (Line[i].length !== 0) {
+Line[i] = `${Line[i]}`;
+} else {
+Line[i] = `                                                                                                                                                                                                                  ${Line[i]}`;
+}
+
             }
            this.setState({
             id: id[3],
             title: theCourse.title,
-            description: theCourse.description,
+            description: Line.toString().replace(/[,]/g, ''),
             estimatedTime: theCourse.estimatedTime,
             materialsNeeded: firstLine.join('                                                                                                  '),
             userId: auth.id,
@@ -88,7 +96,7 @@ class CourseDetail extends Component {
                         submitButtonText='Delete Course'
                         elements={() => (
                             <React.Fragment>
-                                <label for="title" style={styles.title2} >Course</label>
+                                <label htmlFor="title" style={styles.title2} >Course</label>
                                 <span
                                     id="title"
                                     name="title"
@@ -98,15 +106,15 @@ class CourseDetail extends Component {
                                     style={styles.title}>{title}
                                     </span>
                                     <span style={styles.name}>By: {user.name}</span>
-                                <span
+                                <textarea
                                     id="description"
                                     name="dscription"
                                     value={description}
                                     placeholder={description}
                                     style={styles.description} >
                                         {description}
-                                </span>
-                                <label for="estimatedTime" style={styles.estimatedTime2} >Estimated Time</label>
+                                </textarea>
+                                <label htmlFor="estimatedTime" style={styles.estimatedTime2} >Estimated Time</label>
                                 <span
                                     id="estimatedTime"
                                     name="estimatedTime"
@@ -116,7 +124,7 @@ class CourseDetail extends Component {
                                     style={styles.estimatedTime}>
                                         {estimatedTime}
                                  </span>
-                                 <label for="materialsNeeded" style={styles.materialsNeeded2} >Materials Needed</label>
+                                 <label htmlFor="materialsNeeded" style={styles.materialsNeeded2} >Materials Needed</label>
                                 <textarea
                                     id="materialsNeeded"
                                     name="materialsNeeded"
@@ -183,7 +191,6 @@ class CourseDetail extends Component {
     }
 
     update = () => {
-        const { context } = this.props;
         const {
             id,
         } = this.state;
@@ -218,7 +225,7 @@ const styles = {
         position: 'absolute',
         left: '55px',
         top: '280px',
-        'font-size': '35px',
+        fontSize: '35px',
         width: '55%',
         color: '#7c689b',
     },
@@ -228,7 +235,7 @@ const styles = {
         top: '240px',
         width: '45%',
         color: 'darkgray',
-        'border-bottom': '1px solid darkgray',
+        borderBottom: '1px solid darkgray',
     },
     estimatedTime: {
         position: 'absolute',
@@ -242,20 +249,21 @@ const styles = {
         top: '240px',
         width: '30%',
         color: 'darkgray',
-        'border-bottom': '1px solid darkgray',
+        borderBottom: '1px solid darkgray',
     },
     sup: {
         height: '70px',
         position: 'absolute',
         left: '50px',
         top: '270px',
-        'margin-top': '-90px',
+        marginTop: '-90px',
     },
     description: {
         position: 'absolute',
         left: '55px',
         top: '410px',
         width: '55%',
+        border: 'none',
     },
     description2: {
         position: 'absolute',
@@ -277,7 +285,7 @@ const styles = {
         top: '350px',
         width: '30%',
         color: 'darkgray',
-        'border-bottom': '1px solid darkgray',
+        borderBottom: '1px solid darkgray',
     },
     name: {
         position: 'absolute',

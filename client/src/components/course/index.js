@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ItemList from './ItemList';
-import Form from '../Form'
-import { add } from '@fortawesome/free-solid-svg-icons' // <-- import styles to be used
+
 
 class Courses extends Component {
 
@@ -44,7 +43,7 @@ class Courses extends Component {
         const {
             fullArray,
         } = this.state;
-const items = fullArray.map(elm => <ItemList item={elm}/>) 
+const items = fullArray.map(elm => <ItemList key={elm.id} item={elm}/>) 
         return (
 
                         <div className="bounds">
@@ -118,15 +117,15 @@ const styles = {
 
     aButtons2: {
         padding: 70,
-        'padding-left': 110,
-        'padding-right': 110,
+        paddingLeft: 110,
+        paddingRight: 110,
         justifyContent: 'left',
         alignItems: 'left',
-        'margin-left': 25,
-        'width': 80,
+        marginLeft: 25,
+        width: 80,
         height: 30,
         background: '#7c689b',
-        'border-radius': '15px',
+        borderRadius: '15px',
         opacity: '30%',
         color: '#7c689b',
         position: 'relative',
@@ -142,25 +141,25 @@ const styles = {
     },
     aDiv: {
         margin: '15%',
-        'margin-top': '-80px',
+        marginTop: '-80px',
         height: '30%',
 
         width: '90%',
         display: 'flex',
-        'flex-wrap': 'wrap',
-        'justify-content': 'left',
-        'align-content': 'space-around',
+        flexWrap: 'wrap',
+        justifyContent: 'left',
+        alignContent: 'space-around',
     },
     aDiv2: {
-        'margin-top': '190px',
-        'justify-content': 'left',
+        marginTop: '190px',
+        justifyContent: 'left',
 
         height: '0px',
         width: '100%',
         display: 'flex',
     },
 fix: {
-    'justify-content': 'center',
+    justifyContent: 'center',
     width: '100%',
 }
 

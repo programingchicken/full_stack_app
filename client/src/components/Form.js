@@ -6,7 +6,6 @@ const form = (props) => {
     errors,
     submit,
     submitButtonText,
-    deletePage,
     elements,
   } = props;  
 

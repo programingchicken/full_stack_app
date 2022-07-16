@@ -45,6 +45,15 @@ class UpdateCourse extends Component {
             console.log(firstLine[i])
         }
 
+        let Line = theCourse.description.split(/\n/)
+        console.log(Line)
+        for (let i = 0 ; i < Line.length; i++) {
+            console.log(Line[i])
+                if(Line[i] !== '  ') {
+                    Line[i] = `${Line[i]}`;
+                }
+        }
+
         console.log( firstLine.join(''))
            this.setState({
             id: id[3],
@@ -84,7 +93,7 @@ class UpdateCourse extends Component {
                             <React.Fragment>
                                 <div style={{display: 'inline-flex', 'margin-top': '80px'}}>
                                 <div style={styles.div1}>
-                                <label for="title" style={styles.title2} >Course Title</label>
+                                <label htmlFor="title" style={styles.title2} >Course Title</label>
                                 <input
                                     id="title"
                                     name="title"
@@ -94,7 +103,7 @@ class UpdateCourse extends Component {
                                     placeholder='Course Title...' 
                                     style={styles.title}/>
                                 <span style={styles.name}>By: {user.name}</span>
-                                <label for="description" style={styles.description2} >Course Description</label>
+                                <label htmlFor="description" style={styles.description2} >Course Description</label>
                                 <textarea
 
                                     id="description"
@@ -106,7 +115,7 @@ class UpdateCourse extends Component {
                                 </textarea>
                                 </div>
                                 <div style={styles.div2}>
-                                <label for="estimatedTime" style={styles.estimatedTime2} >Estimated Time</label>
+                                <label htmlFor="estimatedTime" style={styles.estimatedTime2} >Estimated Time</label>
                                 <input
                                     id="estimatedTime"
                                     name="estimatedTime"
@@ -115,7 +124,7 @@ class UpdateCourse extends Component {
                                     onChange={this.change}
                                     placeholder='Estimated Time...'
                                     style={styles.estimatedTime} />
-                                <label for="materialsNeeded" style={styles.materialsNeeded2} >Materials Needed</label>
+                                <label htmlFor="materialsNeeded" style={styles.materialsNeeded2} >Materials Needed</label>
                                 <textarea
                                     id="materialsNeeded"
                                     name="materialsNeeded"
@@ -185,15 +194,10 @@ class UpdateCourse extends Component {
     }
 
     cancel = () => {
-        const { context } = this.props;
         const {
             id,
         } = this.state;
 
-        // Create user
-        const course = {
-            id,
-        };
         this.props.history.push(`/course/detail/${id}`);
     }
 }
@@ -205,7 +209,7 @@ const styles = {
     },
     div2: {
         width: '30%',
-        'margin-left': '150px',
+        marginLeft: '150px',
     },
         title: {
             position: 'relative',
@@ -236,7 +240,7 @@ const styles = {
             position: 'absolute',
             left: '50px',
             top: '200px',
-            'margin-top': '-90px',
+            marginTop: '-90px',
         },
         description: {
             position: 'relative',

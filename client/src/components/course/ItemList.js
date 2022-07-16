@@ -13,17 +13,17 @@ const ListItem = ({item}) => {
 const styles = {
     aButtons: {
         padding: 70,
-        'margin-top': '25px',
-        'padding-left': 110,
-        'padding-right': 110,
+        marginTop: '25px',
+        paddingLeft: 110,
+        paddingRight: 110,
         justifyContent: 'left',
         alignItems: 'left',
-        'margin-left': 25,
-        'width': 80,
+        marginLeft: 25,
+        width: 80,
         position: 'relative',
         top: '100px',
         background: '#7c689b',
-        'border-radius': '15px',
+        borderRadius: '15px',
         color: '#fff'
     },
 
@@ -36,7 +36,7 @@ const styles = {
     span2: {
         position: 'relative',
         right: '120px',
-        'font-size': '23px',
+        fontSize: '23px',
 
     }
 }
