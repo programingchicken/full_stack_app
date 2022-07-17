@@ -5,7 +5,7 @@ const ListItem = ({item}) => {
     console.log(item)
     return (
         <React.Fragment>
-            <a type="button" href={`/course/detail/${item.id}`} style={styles.aButtons}><span style={styles.span}>Course</span><span style={styles.span2}>{item.title}</span></a>
+            <a type="button" href={`/course/${item.id}/detail`} style={styles.aButtons}><span style={styles.span}>Course</span><span style={styles.span2}>{item.title}</span></a>
         </React.Fragment>
     )
 };

@@ -23,14 +23,14 @@ class CourseDetail extends Component {
         const hashPass = context.hashPass 
         const id = window.location.pathname.split('/')
         console.log(id.length)
-        console.log(id[3])
+        console.log(id[2])
 
 
 
 
         let theCourse;
         if (auth) {
-         theCourse = await context.data.getCourse(id[3], auth.username, hashPass);
+         theCourse = await context.data.getCourse(id[2], auth.username, hashPass);
         console.log(theCourse)
         } 
 
@@ -64,7 +64,7 @@ class CourseDetail extends Component {
 
             //sets the state
            this.setState({
-            id: id[3],
+            id: id[2],
             title: theCourse.title,
             description: Line.toString().replace(/[,]/g, ''),
             estimatedTime: theCourse.estimatedTime,
@@ -211,11 +211,7 @@ class CourseDetail extends Component {
             id,
         } = this.state;
 
-        // Create user
-        const course = {
-            id,
-        };
-        this.props.history.push(`/course/update/${course.id}`)
+        this.props.history.push(`/course/${id}/update`)
     }
 
     cancel = () => {

@@ -41,8 +41,8 @@ const UserSignOutWithContext = withContext(UserSignOut);
       <HeaderWithContext />
       <Switch>
         <Route exact path="/courses" component={CourseWithContext} />
-        <Route exact path="/course/detail/:id" component={CourseDetailWithContext} /> 
-        <PrivateRoute path="/course/update/:id" component={UpdateCourseWithContext} /> 
+        <Route exact path="/course/:id/detail" component={CourseDetailWithContext} /> 
+        <PrivateRoute exact path="/course/:id/update" component={UpdateCourseWithContext} /> 
 
         <PrivateRoute path="/course/create" component={CreateCourseWithContext} />
         <Route exact path="/" component={Public} />

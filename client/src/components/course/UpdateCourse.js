@@ -24,11 +24,11 @@ class UpdateCourse extends Component {
         const hashPass = context.hashPass 
         const id = window.location.pathname.split('/')
         console.log(id.length)
-        console.log(id[3])
+        console.log(id[2])
         
         let theCourse;
         if (auth) {
-         theCourse = await context.data.getCourse(id[3], auth.username, hashPass);
+         theCourse = await context.data.getCourse(id[2], auth.username, hashPass);
         console.log(theCourse)
         } 
         
@@ -64,7 +64,7 @@ class UpdateCourse extends Component {
                   //sets the state
         console.log( firstLine.join(''))
            this.setState({
-            id: id[3],
+            id: id[2],
             title: theCourse.title,
             description: theCourse.description,
             estimatedTime: theCourse.estimatedTime,
@@ -215,7 +215,7 @@ class UpdateCourse extends Component {
             id,
         } = this.state;
 
-        this.props.history.push(`/course/detail/${id}`);
+        this.props.history.push(`/course/${id}/detail`);
     }
 }
 
