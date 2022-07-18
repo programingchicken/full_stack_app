@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import FormSign from '../FormSign';
 
+
+//sign in
 export default class UserSignIn extends Component {
   state = {
     username: '',
@@ -9,6 +11,8 @@ export default class UserSignIn extends Component {
     errors: [],
   }
 
+
+  //the page
   render() {
     const {
       username,
@@ -67,6 +71,8 @@ export default class UserSignIn extends Component {
     const { from } = this.props.location.state || { from: { pathname: '/authenticated' } };
     const { username, password } = this.state;
 
+
+    //sign in
     context.actions.signIn(username, password)
       .then((user) => {
         if (user === null) {

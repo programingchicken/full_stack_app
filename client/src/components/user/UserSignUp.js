@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import FormSign from '../FormSign';
 
+
+//sign up
 export default class UserSignUp extends Component {
   state = {
     name: '',
@@ -18,6 +20,8 @@ export default class UserSignUp extends Component {
       errors,
     } = this.state;
 
+
+    //page
     return (
       <div className="bounds">
         <div className="grid-33 centered signin">
@@ -88,7 +92,7 @@ export default class UserSignUp extends Component {
     console.log(user.username)
 
 
-
+//create the user
     context.data.createUser(user)
       .then( (data) => {
         console.log(data.length);
