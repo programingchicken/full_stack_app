@@ -107,7 +107,8 @@ class CreateCourse extends Component {
     }
 
 
-    //change
+    
+  //change vals of text input
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -149,6 +150,7 @@ console.log(name)
 //post to API
         context.data.createCourse(course, user.username, hashPass)
             .then(errors => {
+                          //set state errors
                 if (errors.length !== 0) {
                     this.setState({ errors });
                 } else {
@@ -165,6 +167,8 @@ console.log(name)
 
     }
 
+
+      //cancel to route
     cancel = () => {
         this.props.history.push('/courses');
     }

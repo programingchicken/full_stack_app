@@ -28,8 +28,10 @@ class Courses extends Component {
             console.log('poop')
 
 
-            //sets the state
+            
             if (theCourse) {
+   
+            //fix error for if you are not auth but need data
                 if (auth) {
                     this.setState({
                         id: theCourse.id,
@@ -69,7 +71,8 @@ const items = fullArray.map(elm => <ItemList key={elm.id} item={elm}/>)
     }
 
     
-// change text 
+
+  //change vals of text input 
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;

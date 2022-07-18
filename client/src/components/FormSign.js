@@ -24,7 +24,7 @@ const formSign = (props) => {
     cancel();
   }
 
-  //page
+   //the div and form of buttons
   return (
     <div>
       <ErrorsDisplay errors={errors} />

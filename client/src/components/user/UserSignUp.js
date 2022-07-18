@@ -64,6 +64,7 @@ export default class UserSignUp extends Component {
     );
   }
 
+  //change vals of text input
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -96,6 +97,8 @@ export default class UserSignUp extends Component {
     context.data.createUser(user)
       .then( (data) => {
         console.log(data.length);
+
+        //set state errors
         if (data.length !== 0) {
           this.setState({ errors: data });
       }  else {

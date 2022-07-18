@@ -55,6 +55,8 @@ export default class UserSignIn extends Component {
     );
   }
 
+
+  //change vals of text input
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -76,6 +78,8 @@ export default class UserSignIn extends Component {
     context.actions.signIn(username, password)
       .then((user) => {
         if (user === null) {
+
+          //set state errors
           this.setState(() => {
             return { errors: [ 'Sign-in was unsuccessful' ] };
           });

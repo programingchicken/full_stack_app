@@ -23,7 +23,7 @@ const form = (props) => {
   }
 
 
-  //the page
+  //the div and form of buttons
   return (
     <div>
       <ErrorsDisplay errors={errors} />

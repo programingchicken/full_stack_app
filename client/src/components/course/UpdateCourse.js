@@ -34,11 +34,12 @@ class UpdateCourse extends Component {
         
 
 
+            //check if you are owner if you are give data if not send some where else
         if (auth.id === theCourse.userId) {
 
 
         if (theCourse) {
-//fixes materials text
+//fixes materials text with split and for loop
 let firstLine = theCourse.materialsNeeded.split(/[-*]/)
 console.log(firstLine)
 for (let i = 0 ; i < firstLine.length; i++) {
@@ -56,7 +57,7 @@ for (let i = 0 ; i < firstLine.length; i++) {
 
 
 
-//fixes des text
+      //fixes des text with split and for loop
         let Line = theCourse.description.split(/\n/)
         console.log(Line)
         for (let i = 0 ; i < Line.length; i++) {
@@ -163,7 +164,7 @@ for (let i = 0 ; i < firstLine.length; i++) {
     }
 
 
-    ///change
+    //change vals of text input
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -204,6 +205,8 @@ for (let i = 0 ; i < firstLine.length; i++) {
         //put to the API
         context.data.updateCourse(id, course, user.username, hashPass)
             .then(errors => {
+
+            //set state errors
                 if (errors.length !== 0) {
                     this.setState({ errors });
                 } else {
@@ -219,6 +222,8 @@ for (let i = 0 ; i < firstLine.length; i++) {
 
     }
 
+
+    //cancel to route
     cancel = () => {
         const {
             id,

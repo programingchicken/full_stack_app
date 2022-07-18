@@ -20,24 +20,21 @@ class CourseDetail extends Component {
 
     //mounts after
    async componentDidMount() {
+
+    //vars
         const { context } = this.props;
         const auth = context.authenticatedUser
         const hashPass = context.hashPass 
         const id = window.location.pathname.split('/')
         console.log(id.length)
         console.log(id[2])
-
-
-
-
         let theCourse = await context.data.getCourse(id[2]);
         console.log(theCourse)
     
 
 
-//fixes materials text
         if (theCourse ) {
-//fixes materials text
+//fixes materials text with split and for loop
 let firstLine = theCourse.materialsNeeded.split(/[-*]/)
 console.log(firstLine)
 for (let i = 0 ; i < firstLine.length; i++) {
@@ -53,7 +50,7 @@ for (let i = 0 ; i < firstLine.length; i++) {
 }
 
 
-//fixes des text
+            //fixes des text with split and for loop
             let Line = theCourse.description.split(/\r/)
             console.log(Line)
             for (let i = 0 ; i < Line.length; i++) {
@@ -66,6 +63,9 @@ for (let i = 0 ; i < firstLine.length; i++) {
 
             }
 
+
+
+            //fix error for if you are not auth but need data
                 if (auth) {
                     this.setState({
                         id: id[2],
@@ -173,7 +173,8 @@ console.log(name)
         );
     }
 
-    // change event
+   
+  //change vals of text input
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -213,6 +214,8 @@ console.log(name)
         //delete
         context.data.deleteCourse(id, course, user.username, hashPass)
             .then(errors => {
+
+               //change page
                 if (errors.length !== 0) {
                     this.props.history.push(`/course/notOwned`);
                 } else {
@@ -237,6 +240,8 @@ console.log(name)
         this.props.history.push(`/course/${id}/update`)
     }
 
+
+      //cancel to route
     cancel = () => {
         this.props.history.push('/courses');
     }

@@ -37,7 +37,9 @@ const formDetail = (props) => {
     update();
   }
 console.log(`${user}   ${courseUserId}`)
-  if (user === courseUserId && user ) {  //page
+
+ //the div and form of buttons if user is auth user show update and delete button
+  if (user === courseUserId && user ) {  
     return (
      
      <div>
