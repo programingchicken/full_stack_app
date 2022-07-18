@@ -22,26 +22,31 @@ class Courses extends Component {
 
 
         //checks for auth
-        let theCourse
-        if (auth) {
-            theCourse = await context.data.getAllCourse(auth.username, hashPass);
+
+        let theCourse = await context.data.getAllCourse();
             console.log(theCourse)
             console.log('poop')
-        } else {
-            this.props.history.push(`/course/notOwned`);
-        }
 
 
             //sets the state
             if (theCourse) {
-           this.setState({
-            id: theCourse.id,
-            title: theCourse.title,
-            userId: auth.id,
-            user: auth,
-            hashPass: hashPass,
-            fullArray: theCourse,
-        })
+                if (auth) {
+                    this.setState({
+                        id: theCourse.id,
+                        title: theCourse.title,
+                        userId: auth.id,
+                        user: auth,
+                        hashPass: hashPass,
+                        fullArray: theCourse,
+                    })
+                } else { 
+                    this.setState({
+                        id: theCourse.id,
+                        title: theCourse.title,
+                        fullArray: theCourse,
+                    })
+                }
+
     }
 } 
 

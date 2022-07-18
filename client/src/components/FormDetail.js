@@ -1,7 +1,11 @@
 import React from 'react';
+
+
 //form for details
 const formDetail = (props) => {
   const {
+    user,
+    courseUserId,
     cancel,
     errors,
     submit,
@@ -9,6 +13,8 @@ const formDetail = (props) => {
     update,
     elements,
   } = props;  
+
+
 
 
   //submit
@@ -30,23 +36,38 @@ const formDetail = (props) => {
     event.preventDefault();
     update();
   }
+console.log(`${user}   ${courseUserId}`)
+  if (user === courseUserId && user ) {  //page
+    return (
+     
+     <div>
+       <ErrorsDisplay errors={errors} />
+       <form onSubmit={handleSubmit}>
+       <div className="pad-bottom" style={styles.pad}>
+           <button className="up button" onClick={handleUpdate} style={styles.theButton}>Update Course</button>
+           <button className="sub button" type="submit" style={styles.theButton}>{submitButtonText}</button>
+           <button className="cancel button button-secondary" onClick={handleCancel} style={styles.theButton}>Return to List</button>
+         </div>
+         {elements()}
+ 
+       </form>
+     </div>
+    )
+    } else {
+ return (
+   <div>
+       <ErrorsDisplay errors={errors} />
+       <form onSubmit={handleSubmit}>
+       <div className="pad-bottom" style={styles.pad}>
+           <button className="cancel button button-secondary" onClick={handleCancel} style={styles.theButton2}>Return to List</button>
+         </div>
+         {elements()}
+ 
+       </form>
+     </div>
+   )}
 
 
-  //page
-  return (
-    <div>
-      <ErrorsDisplay errors={errors} />
-      <form onSubmit={handleSubmit}>
-      <div className="pad-bottom" style={styles.pad}>
-          <button className="up button" onClick={handleUpdate} style={styles.theButton}>Update Course</button>
-          <button className="sub button" type="submit" style={styles.theButton}>{submitButtonText}</button>
-          <button className="cancel button button-secondary" onClick={handleCancel} style={styles.theButton}>Return to List</button>
-        </div>
-        {elements()}
-
-      </form>
-    </div>
-  );
 }
 
 
@@ -78,6 +99,14 @@ const styles = {
     top: '-120px',
     right: '80%',
     display: 'inline',
+},
+theButton2: {
+  opacity: '100%',
+  height: '55px',
+  position: 'relative',
+  top: '-120px',
+  right: '400px',
+  display: 'inline',
 },
 pad: {
   display: 'inline-flex',

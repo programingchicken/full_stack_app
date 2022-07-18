@@ -103,13 +103,9 @@ const router = express.Router();
     body("description").notEmpty().withMessage('You need a description')
 ]
 
-//show all courses 
-router.get("/courses", courseAuth, asyncHandler(async (req, res, next) => {
-    const credentials = auth(req);
-    const user = await User.findOne({ where: { username: credentials.name } })
-    console.log(req.body)
+//show all courses
+router.get("/courses", asyncHandler(async (req, res, next) => {
     const courses = await Course.findAll({
-         where: { userId: user.id },
         include: [
             {
                 model: User,
@@ -126,12 +122,11 @@ router.get("/courses", courseAuth, asyncHandler(async (req, res, next) => {
 }));
 
 //sellect a course
-router.get("/course/:id", courseAuth, asyncHandler(async (req, res, next) => {
+router.get("/course/:id", asyncHandler(async (req, res, next) => {
     const reqID = req.params.id
-    const credentials = auth(req);
-    const user = await User.findOne({ where: { username: credentials.name } })
+
     const courses = await Course.findOne({
-        where: { userId: user.id, id: reqID },
+        where: { id: reqID },
     })
     console.log(courses)
         res.json(courses).end()
@@ -211,16 +206,25 @@ router.put("/course/:id", [
 //delete a course
 router.delete("/course/:id", courseAuth, asyncHandler(async (req, res, next) => {
     const reqID = req.params.id
-    const courses = await Course.destroy({ where: { id: reqID } })
-    if (courses) {
-        console.log('successfully deleted the course!')
+    const credentials = auth(req);
+      const user = await User.findOne({ where: { username: credentials.name } })
+      if (user) {
+        const courses = await Course.destroy({ where: { id: reqID , userId: user.id} })
+        if (courses) {
+            console.log('successfully deleted the course!')
+            res
+                // .send('successfully deleted the course!')
+                .status(204)
+                .end()
+        } else if (user || courses) {
         res
-            // .send('successfully deleted the course!')
-            .status(204)
-            .end()
-    } else {
-        next(err)
-    }
+              // .send('didnt successfully deleted the course!')
+              .status(401)
+              .end()
+        } else {
+          next(err)
+      }
+      }
 }));
 
 // {

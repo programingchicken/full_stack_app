@@ -11,9 +11,11 @@ class CourseDetail extends Component {
         estimatedTime: '',
         materialsNeeded: '',
         userId: '',
+        courseUserId: '',
         user: '',
         hashPass: '',
         errors: [],
+        name: '',
     }
 
     //mounts after
@@ -28,25 +30,27 @@ class CourseDetail extends Component {
 
 
 
-        let theCourse;
-        if (auth) {
-         theCourse = await context.data.getCourse(id[2], auth.username, hashPass);
+        let theCourse = await context.data.getCourse(id[2]);
         console.log(theCourse)
-        } 
+    
 
 
 //fixes materials text
         if (theCourse ) {
-            let firstLine = theCourse.materialsNeeded.split(/\n/)
-            console.log(firstLine)
-            for (let i = 0 ; i < firstLine.length; i++) {
-                console.log(firstLine[i])
-                if (firstLine[i].charAt(0) !== '*') {
-                    if(firstLine[i] !== '') {
-                        firstLine[i] = `*${firstLine[i]}`;
-                    }
-                }
+//fixes materials text
+let firstLine = theCourse.materialsNeeded.split(/[-*]/)
+console.log(firstLine)
+for (let i = 0 ; i < firstLine.length; i++) {
+    console.log(firstLine[i])
+    if (firstLine[i].charAt(0) !== '•') {
+        if(firstLine[i].charAt(1) !== /\s/) {
+            firstLine[i] = `•${firstLine[i]}`;
+            if (firstLine[0].charAt(0) === '•') {
+                firstLine[0] = '';
             }
+        }
+    }
+}
 
 
 //fixes des text
@@ -62,20 +66,35 @@ class CourseDetail extends Component {
 
             }
 
-            //sets the state
-           this.setState({
-            id: id[2],
-            title: theCourse.title,
-            description: Line.toString().replace(/[,]/g, ''),
-            estimatedTime: theCourse.estimatedTime,
-            materialsNeeded: firstLine.join('                                                                                                  '),
-            userId: auth.id,
-            user: auth,
-            hashPass: hashPass,
-        })
+                if (auth) {
+                    this.setState({
+                        id: id[2],
+                        title: theCourse.title,
+                        description: Line.toString().replace(/[,]/g, ''),
+                        estimatedTime: theCourse.estimatedTime,
+                        materialsNeeded: firstLine.join('                                                                                                  '),
+                        userId: auth.id,
+                        courseUserId: theCourse.userId,
+                        user: auth,
+                        hashPass: hashPass,
+                        name: theCourse.name,
+                    })
+                } else { 
+                    this.setState({
+                        id: id[2],
+                        title: theCourse.title,
+                        description: Line.toString().replace(/[,]/g, ''),
+                        estimatedTime: theCourse.estimatedTime,
+                        materialsNeeded: firstLine.join('                                                                                                  '),
+                        name: theCourse.name,
+                    })
+                }
+
     } else {
-        this.props.history.push(`/course/notOwned`);
+            this.props.history.push(`/course/oopsNotFound`);
+        
     }
+
     }
 
 
@@ -87,11 +106,13 @@ class CourseDetail extends Component {
             description,
             estimatedTime,
             materialsNeeded,
-            user,
+            userId,
+            courseUserId,
             errors,
+            name
         } = this.state;
 
-
+console.log(name)
  
         return (
             <div className="bounds">
@@ -101,6 +122,8 @@ class CourseDetail extends Component {
                     <FormDetail
                         style={styles.forms}
                         errors={errors}
+                        user={userId}
+                        courseUserId={courseUserId}
                         update={this.update}
                         submit={this.submit}
                         cancel={this.cancel}
@@ -116,7 +139,7 @@ class CourseDetail extends Component {
                                     placeholder={title} 
                                     style={styles.title}>{title}
                                     </span>
-                                    <span style={styles.name}>By: {user.name}</span>
+                                    <span style={styles.name}>By: {name}</span>
                                 <textarea
                                     id="description"
                                     name="dscription"
@@ -190,9 +213,9 @@ class CourseDetail extends Component {
         //delete
         context.data.deleteCourse(id, course, user.username, hashPass)
             .then(errors => {
-                if (errors.length) {
-                    this.setState({ errors });
-                 } else {
+                if (errors.length !== 0) {
+                    this.props.history.push(`/course/notOwned`);
+                } else {
                     console.log(`${course.title} is successfully Deleted!`)
 
                             this.props.history.push('/courses');

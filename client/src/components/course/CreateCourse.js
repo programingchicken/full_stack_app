@@ -13,6 +13,7 @@ class CreateCourse extends Component {
         user: '',
         hashPass: '',
         errors: [],
+        name: '',
     }
     //mounts after
     componentDidMount() {
@@ -25,6 +26,7 @@ class CreateCourse extends Component {
             userId: auth.id,
             user: auth,
             hashPass: hashPass,
+            name: auth.name,
         })
     }
 
@@ -62,7 +64,9 @@ class CreateCourse extends Component {
                                     placeholder='Course Title...' 
                                     style={styles.title}/>
 
-                                <span style={styles.name}>By: {user.name}</span>
+                                <span id="name"
+                                    name="name"
+                                    value={user.name} style={styles.name}>By: {user.name}</span>
                                 <label htmlFor="description" style={styles.description2} >Course Description</label>
                                 <textarea
 
@@ -127,6 +131,7 @@ class CreateCourse extends Component {
             userId,
             user,
             hashPass,
+            name,
         } = this.state;
 
         // Create user
@@ -136,8 +141,10 @@ class CreateCourse extends Component {
             estimatedTime,
             materialsNeeded,
             userId,
+            name,
         };
 console.log(hashPass)
+console.log(name)
 
 //post to API
         context.data.createCourse(course, user.username, hashPass)

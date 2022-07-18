@@ -14,6 +14,7 @@ class UpdateCourse extends Component {
         user: '',
         hashPass: '',
         errors: [],
+        name: '',
     }
 
 
@@ -26,27 +27,32 @@ class UpdateCourse extends Component {
         console.log(id.length)
         console.log(id[2])
         
-        let theCourse;
-        if (auth) {
-         theCourse = await context.data.getCourse(id[2], auth.username, hashPass);
+
+        let theCourse = await context.data.getCourse(id[2]);
         console.log(theCourse)
-        } 
         
+        
+
+
+        if (auth.id === theCourse.userId) {
 
 
         if (theCourse) {
 //fixes materials text
-        let firstLine = theCourse.materialsNeeded.split(/\n/)
-        console.log(firstLine)
-        for (let i = 0 ; i < firstLine.length; i++) {
-            console.log(firstLine[i])
-            if (firstLine[i].charAt(0) !== '*') {
-                firstLine[i] = `*${firstLine[i]}`;
+let firstLine = theCourse.materialsNeeded.split(/[-*]/)
+console.log(firstLine)
+for (let i = 0 ; i < firstLine.length; i++) {
+    console.log(firstLine[i])
+    if (firstLine[i].charAt(0) !== '•') {
+        if(firstLine[i].charAt(1) !== /\s/) {
+            firstLine[i] = `•${firstLine[i]}`;
+            if (firstLine[0].charAt(0) === '•') {
+                firstLine[0] = '';
             }
-
-
-            console.log(firstLine[i])
         }
+    }
+}
+
 
 
 
@@ -74,9 +80,12 @@ class UpdateCourse extends Component {
             hashPass: hashPass,
         })
     } else {
+        this.props.history.push(`/course/oopsNotFound`);
+    }
+    } else {
         this.props.history.push(`/course/notOwned`);
     }
-    }
+}
 
 
     //page
@@ -102,7 +111,7 @@ class UpdateCourse extends Component {
                         submitButtonText="Update Course"
                         elements={() => (
                             <React.Fragment>
-                                <div style={{display: 'inline-flex', 'margin-top': '80px'}}>
+                                <div style={{display: 'inline-flex', marginTop: '80px'}}>
                                 <div style={styles.div1}>
                                 <label htmlFor="title" style={styles.title2} >Course Title</label>
                                 <input

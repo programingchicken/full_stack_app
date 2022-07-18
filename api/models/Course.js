@@ -41,6 +41,10 @@ module.exports = (sequelize) => {
     materialsNeeded: {
       type: DataTypes.STRING,
       allowNull: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
     }
   },
     {

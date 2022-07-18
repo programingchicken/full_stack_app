@@ -77,7 +77,6 @@ export default class UserSignUp extends Component {
       name,
       username,
       password,
-      errors,
     } = this.state;
 
     // Create user
