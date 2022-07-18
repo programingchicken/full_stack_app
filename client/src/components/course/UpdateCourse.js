@@ -42,16 +42,18 @@ class UpdateCourse extends Component {
 //fixes materials text with split and for loop
 let firstLine = theCourse.materialsNeeded.split(/[-*]/)
 console.log(firstLine)
+if (firstLine.length > 1) {
 for (let i = 0 ; i < firstLine.length; i++) {
     console.log(firstLine[i])
     if (firstLine[i].charAt(0) !== '•') {
-        if(firstLine[i].charAt(1) !== /\s/) {
+        if(firstLine[i].charAt(1) !== '') {
             firstLine[i] = `•${firstLine[i]}`;
-            if (firstLine[0].charAt(0) === '•') {
-                firstLine[0] = '';
-            }
+
+        } else {
+            firstLine[i] = ``;
         }
     }
+}
 }
 
 
