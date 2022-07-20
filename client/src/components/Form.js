@@ -75,7 +75,7 @@ err: {
   position: 'relative',
   left: '50px',
   top: '60px',
-  'margin-bottom': '20px',
+  marginBottom: '20px',
 }
 }
 

@@ -117,7 +117,7 @@ router.get("/courses", asyncHandler(async (req, res, next) => {
         res.status(200).json(courses).end();
     } else {
         console.log({ message: "Sorry, no courses found. :(" })
-        res.status(401).end();
+        res.status(404).json({error: 'no courses found'}).end();
     }
 }));
 
