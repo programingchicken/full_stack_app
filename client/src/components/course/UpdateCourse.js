@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactMarkdown from 'react-markdown'
 import Form from '../Form';
 
 
@@ -45,6 +46,7 @@ console.log(firstLine)
 if (firstLine.length > 1) {
 for (let i = 0 ; i < firstLine.length; i++) {
     console.log(firstLine[i])
+    if (firstLine[i].charAt(0) !== ' ') {
     if (firstLine[i].charAt(0) !== '•') {
         if(firstLine[i].charAt(1) !== '') {
             firstLine[i] = `•${firstLine[i]}`;
@@ -53,6 +55,7 @@ for (let i = 0 ; i < firstLine.length; i++) {
             firstLine[i] = ``;
         }
     }
+}
 }
 }
 
@@ -128,14 +131,15 @@ for (let i = 0 ; i < firstLine.length; i++) {
                                 <span style={styles.name}>By: {user.name}</span>
                                 <label htmlFor="description" style={styles.description2} >Course Description</label>
                                 <textarea
-
                                     id="description"
                                     name="description"
                                     value={description}
                                     onChange={this.change}
                                     placeholder='Course Description...' 
                                     style={styles.description}>
+                                <ReactMarkdown>{description}</ReactMarkdown>
                                 </textarea>
+                                
                                 </div>
                                 <div style={styles.div2}>
                                 <label htmlFor="estimatedTime" style={styles.estimatedTime2} >Estimated Time</label>
@@ -155,6 +159,7 @@ for (let i = 0 ; i < firstLine.length; i++) {
                                     onChange={this.change}
                                     placeholder='Materials List...'
                                     style={styles.materialsNeeded} >
+                                <ReactMarkdown>{materialsNeeded}</ReactMarkdown>
                                 </textarea>
                                 </div>
                                 </div>

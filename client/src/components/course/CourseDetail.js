@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactMarkdown from 'react-markdown'
 import FormDetail from '../FormDetail';
 
 
@@ -40,7 +41,7 @@ console.log(firstLine)
 if (firstLine.length > 1) {
 for (let i = 0 ; i < firstLine.length; i++) {
     console.log(firstLine[i])
-
+    if (firstLine[i].charAt(0) !== ' ') {
     if (firstLine[i].charAt(0) !== '•') {
         if(firstLine[i].charAt(1) !== '') {
             firstLine[i] = `•${firstLine[i]}`;
@@ -50,6 +51,7 @@ for (let i = 0 ; i < firstLine.length; i++) {
             firstLine[i] = ``;
         }
     }
+}
 }
 }
 
@@ -148,9 +150,8 @@ console.log(name)
                                     id="description"
                                     name="dscription"
                                     value={description}
-                                    placeholder={description}
-                                    style={styles.description} >
-                                        {description}
+                                    style={styles.description} readOnly>
+                                   <ReactMarkdown>{description}</ReactMarkdown>
                                 </textarea>
                                 <label htmlFor="estimatedTime" style={styles.estimatedTime2} >Estimated Time</label>
                                 <span
@@ -167,8 +168,8 @@ console.log(name)
                                     id="materialsNeeded"
                                     name="materialsNeeded"
                                     value={materialsNeeded}
-                                    placeholder={materialsNeeded}
-                                    style={styles.materialsNeeded} >
+                                    style={styles.materialsNeeded} readOnly>
+                                        <ReactMarkdown>{materialsNeeded}</ReactMarkdown>
                                 </textarea>
                             </React.Fragment>
                         )} />
