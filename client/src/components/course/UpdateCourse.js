@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ReactMarkdown from 'react-markdown'
 import Form from '../Form';
+
 
 
 class UpdateCourse extends Component {
@@ -40,47 +40,13 @@ class UpdateCourse extends Component {
 
 
         if (theCourse) {
-//fixes materials text with split and for loop
-let firstLine = theCourse.materialsNeeded.split(/[-*]/)
-console.log(firstLine)
-if (firstLine.length > 1) {
-for (let i = 0 ; i < firstLine.length; i++) {
-    console.log(firstLine[i])
-    if (firstLine[i].charAt(0) !== ' ') {
-    if (firstLine[i].charAt(0) !== '•') {
-        if(firstLine[i].charAt(1) !== '') {
-            firstLine[i] = `•${firstLine[i]}`;
-
-        } else {
-            firstLine[i] = ``;
-        }
-    }
-}
-}
-}
-
-
-
-
-      //fixes des text with split and for loop
-        let Line = theCourse.description.split(/\n/)
-        console.log(Line)
-        for (let i = 0 ; i < Line.length; i++) {
-            console.log(Line[i])
-                if(Line[i] !== '  ') {
-                    Line[i] = `${Line[i]}`;
-                }
-        }
-
-
                   //sets the state
-        console.log( firstLine.join(''))
            this.setState({
             id: id[2],
             title: theCourse.title,
             description: theCourse.description,
             estimatedTime: theCourse.estimatedTime,
-            materialsNeeded:firstLine.join('                                                                                                  '),
+            materialsNeeded: theCourse.materialsNeeded,
             userId: auth.id,
             user: auth,
             hashPass: hashPass,
@@ -137,7 +103,6 @@ for (let i = 0 ; i < firstLine.length; i++) {
                                     onChange={this.change}
                                     placeholder='Course Description...' 
                                     style={styles.description}>
-                                <ReactMarkdown>{description}</ReactMarkdown>
                                 </textarea>
                                 
                                 </div>
@@ -155,11 +120,10 @@ for (let i = 0 ; i < firstLine.length; i++) {
                                 <textarea
                                     id="materialsNeeded"
                                     name="materialsNeeded"
-                                    value={materialsNeeded}
                                     onChange={this.change}
+                                    value={materialsNeeded}
                                     placeholder='Materials List...'
                                     style={styles.materialsNeeded} >
-                                <ReactMarkdown>{materialsNeeded}</ReactMarkdown>
                                 </textarea>
                                 </div>
                                 </div>

@@ -4,21 +4,21 @@ const development ={
     username: "root",
     password: null,
     database: "database_development",
-    host: './dev.sqlite',
+    host: './fsjstd-restapi.db',
     dialect: "sqlite",
   },
   test: {
     username: "root",
     password: null,
     database: "database_test",
-    host: './dev.sqlite',
+    host: './fsjstd-restapi.db',
     dialect: "sqlite"
   },
   production: {
     username: "root",
     password: null,
     database: "database_production",
-    host: './dev.sqlite',
+    host: './fsjstd-restapi.db',
     dialect: "sqlite"
   }
 }

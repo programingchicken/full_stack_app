@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import ReactMarkdown from 'react-markdown'
+
+//got this from stack over flow Couldnt get text
+import ReactMarkdown from "react-markdown";
 import FormDetail from '../FormDetail';
 
 
@@ -35,40 +37,6 @@ class CourseDetail extends Component {
 
 
         if (theCourse ) {
-//fixes materials text with split and for loop
-let firstLine = theCourse.materialsNeeded.split(/[-*]/)
-console.log(firstLine)
-if (firstLine.length > 1) {
-for (let i = 0 ; i < firstLine.length; i++) {
-    console.log(firstLine[i])
-    if (firstLine[i].charAt(0) !== ' ') {
-    if (firstLine[i].charAt(0) !== '•') {
-        if(firstLine[i].charAt(1) !== '') {
-            firstLine[i] = `•${firstLine[i]}`;
-
-            
-        }else {
-            firstLine[i] = ``;
-        }
-    }
-}
-}
-}
-
-
-            //fixes des text with split and for loop
-            let Line = theCourse.description.split(/\r/)
-            console.log(Line)
-            for (let i = 0 ; i < Line.length; i++) {
-                console.log(Line[i])
-                if (Line[i].length !== 0) {
-                Line[i] = `${Line[i]}`;
-                } else {
-                Line[i] = `                                                                                                                                                                                                                  ${Line[i]}`;
-                }
-
-            }
-
 
 
             //fix error for if you are not auth but need data
@@ -76,9 +44,9 @@ for (let i = 0 ; i < firstLine.length; i++) {
                     this.setState({
                         id: id[2],
                         title: theCourse.title,
-                        description: Line.toString().replace(/[,]/g, ''),
+                        description: theCourse.description,
                         estimatedTime: theCourse.estimatedTime,
-                        materialsNeeded: firstLine.join('                                                                                                  '),
+                        materialsNeeded: theCourse.materialsNeeded,
                         userId: auth.id,
                         courseUserId: theCourse.userId,
                         user: auth,
@@ -89,9 +57,9 @@ for (let i = 0 ; i < firstLine.length; i++) {
                     this.setState({
                         id: id[2],
                         title: theCourse.title,
-                        description: Line.toString().replace(/[,]/g, ''),
+                        description: theCourse.description,
                         estimatedTime: theCourse.estimatedTime,
-                        materialsNeeded: firstLine.join('                                                                                                  '),
+                        materialsNeeded: theCourse.materialsNeeded,
                         name: theCourse.name,
                     })
                 }
@@ -146,13 +114,12 @@ console.log(name)
                                     style={styles.title}>{title}
                                     </span>
                                     <span style={styles.name}>By: {name}</span>
-                                <textarea
+                                    <ReactMarkdown 
                                     id="description"
-                                    name="dscription"
-                                    value={description}
-                                    style={styles.description} readOnly>
-                                   <ReactMarkdown>{description}</ReactMarkdown>
-                                </textarea>
+                                    name="dscription" 
+                                    className='description'>
+                                    {description}
+                                    </ReactMarkdown>
                                 <label htmlFor="estimatedTime" style={styles.estimatedTime2} >Estimated Time</label>
                                 <span
                                     id="estimatedTime"
@@ -164,13 +131,7 @@ console.log(name)
                                         {estimatedTime}
                                  </span>
                                  <label htmlFor="materialsNeeded" style={styles.materialsNeeded2} >Materials Needed</label>
-                                <textarea
-                                    id="materialsNeeded"
-                                    name="materialsNeeded"
-                                    value={materialsNeeded}
-                                    style={styles.materialsNeeded} readOnly>
-                                        <ReactMarkdown>{materialsNeeded}</ReactMarkdown>
-                                </textarea>
+                                 <ReactMarkdown className='materialsNeeded'>{materialsNeeded}</ReactMarkdown>
                             </React.Fragment>
                         )} />
                 </div>
@@ -305,13 +266,6 @@ const styles = {
         top: '270px',
         marginTop: '-90px',
     },
-    description: {
-        position: 'absolute',
-        left: '55px',
-        top: '410px',
-        width: '55%',
-        border: 'none',
-    },
     description2: {
         position: 'absolute',
         left: '55px',
@@ -319,13 +273,6 @@ const styles = {
         width: '55%',
     },
 
-    materialsNeeded: {
-        position: 'absolute',
-        right: '65px',
-        top: '400px',
-        width: '30%',
-        border: 'none',
-    },
     materialsNeeded2: {
         position: 'absolute',
         right: '55px',

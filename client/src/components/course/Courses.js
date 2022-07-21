@@ -55,15 +55,10 @@ class Courses extends Component {
 
   //page
     render() {
-
-        const { context } = this.props;
-        const auth = context.authenticatedUser
         const {
             fullArray,
         } = this.state;
 const items = fullArray.map(elm => <ItemList key={elm.id} item={elm}/>) 
-
-if (auth) {
     return (
 
         <div className="bounds">
@@ -72,16 +67,7 @@ if (auth) {
             </div>
         </div>
 )
-} else {
-    return (
 
-        <div className="bounds">
-            <div className="grid-33 centered signin">
-                {fullArray.length === 0 ? 'No Courses' : <div style={styles.fix}><div style={styles.aDiv}>{items}</div></div>}
-            </div>
-        </div>
-)
-}
 
 
     }

@@ -34,13 +34,12 @@ class Database {
     return this.context
       .execute(`
         INSERT INTO Users
-          (firstName, lastName, emailAddress, password, createdAt, updatedAt)
+          (name, username, password, createdAt, updatedAt)
         VALUES
-          (?, ?, ?, ?, datetime('now'), datetime('now'));
+          (?, ?, ?, datetime('now'), datetime('now'));
       `,
-      user.firstName,
-      user.lastName,
-      user.emailAddress,
+      user.name,
+      user.username,
       user.password);
   }
 
@@ -83,24 +82,23 @@ class Database {
   }
 
   async init() {
-    const userTableExists = await this.tableExists('Users');
+    const userTableExists = await this.tableExists('User');
 
     if (userTableExists) {
-      this.log('Dropping the Users table...');
+      this.log('Dropping the User table...');
 
       await this.context.execute(`
         DROP TABLE IF EXISTS Users;
       `);
     }
 
-    this.log('Creating the Users table...');
+    this.log('Creating the User table...');
 
     await this.context.execute(`
       CREATE TABLE Users (
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        firstName VARCHAR(255) NOT NULL DEFAULT '', 
-        lastName VARCHAR(255) NOT NULL DEFAULT '', 
-        emailAddress VARCHAR(255) NOT NULL DEFAULT '' UNIQUE, 
+        name VARCHAR(255) NOT NULL DEFAULT '', 
+        username VARCHAR(255) NOT NULL DEFAULT '' UNIQUE, 
         password VARCHAR(255) NOT NULL DEFAULT '', 
         createdAt DATETIME NOT NULL, 
         updatedAt DATETIME NOT NULL
@@ -118,14 +116,14 @@ class Database {
     const courseTableExists = await this.tableExists('Courses');
 
     if (courseTableExists) {
-      this.log('Dropping the Courses table...');
+      this.log('Dropping the Course table...');
 
       await this.context.execute(`
         DROP TABLE IF EXISTS Courses;
       `);
     }
 
-    this.log('Creating the Courses table...');
+    this.log('Creating the Course table...');
 
     await this.context.execute(`
       CREATE TABLE Courses (
@@ -137,7 +135,7 @@ class Database {
         createdAt DATETIME NOT NULL, 
         updatedAt DATETIME NOT NULL, 
         userId INTEGER NOT NULL DEFAULT -1 
-          REFERENCES Users (id) ON DELETE CASCADE ON UPDATE CASCADE
+          REFERENCES User (id) ON DELETE CASCADE ON UPDATE CASCADE
       );
     `);
 

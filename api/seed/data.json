@@ -1,15 +1,13 @@
 {
   "users": [
     {
-      "firstName": "Joe",
-      "lastName": "Smith",
-      "emailAddress": "joe@smith.com",
+      "name": "Smith",
+      "username": "joe@smith.com",
       "password": "joepassword"
     },
     {
-      "firstName": "Sally",
-      "lastName": "Jones",
-      "emailAddress": "sally@jones.com",
+      "name": "Jones",
+      "username": "sally@jones.com",
       "password": "sallypassword"
     }
   ],
