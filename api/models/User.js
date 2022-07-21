@@ -26,13 +26,13 @@ module.exports = (sequelize) => {
         }
       }
     },
-    username: {
+    emailAddress: {
       type: DataTypes.STRING,
       allowNull: false,
 
       validate: {
         notNull: {
-          msg: 'You need a username'
+          msg: 'You need a emailAddress'
         }
       }
     },

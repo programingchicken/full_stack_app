@@ -6,7 +6,7 @@ import FormSign from '../FormSign';
 //sign in
 export default class UserSignIn extends Component {
   state = {
-    username: '',
+    emailAddress: '',
     password: '',
     errors: [],
   }
@@ -15,7 +15,7 @@ export default class UserSignIn extends Component {
   //the page
   render() {
     const {
-      username,
+      emailAddress,
       password,
       errors,
     } = this.state;
@@ -32,12 +32,12 @@ export default class UserSignIn extends Component {
             elements={() => (
               <React.Fragment>
                 <input 
-                  id="username" 
-                  name="username" 
+                  id="emailAddress" 
+                  name="emailAddress" 
                   type="text"
-                  value={username} 
+                  value={emailAddress} 
                   onChange={this.change} 
-                  placeholder="User Name" />
+                  placeholder="Email Address" />
                 <input 
                   id="password" 
                   name="password"
@@ -71,11 +71,11 @@ export default class UserSignIn extends Component {
   submit = () => {
     const { context } = this.props;
     const { from } = this.props.location.state || { from: { pathname: '/authenticated' } };
-    const { username, password } = this.state;
+    const { emailAddress, password } = this.state;
 
 
     //sign in
-    context.actions.signIn(username, password)
+    context.actions.signIn(emailAddress, password)
       .then((user) => {
         if (user === null) {
 

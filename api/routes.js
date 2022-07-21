@@ -23,7 +23,7 @@ const bcryptjs = require('bcryptjs');
   
     if (credentials) {
       // Look for a user whose `username` matches the credentials `name` property.
-      const user = await User.findOne({ where: { username: credentials.name } })
+      const user = await User.findOne({ where: { emailAddress: credentials.name } })
 
       if (user) {
 
@@ -34,18 +34,18 @@ const bcryptjs = require('bcryptjs');
             const course = await Course.findAll({ where: { userId: user.id } })
         
             if (course != null) {
-                console.log(`Authentication successful for username: ${user.username}`);
+                console.log(`Authentication successful for emailAddress: ${user.emailAddress}`);
                 console.log(user.id)
                 // Store the user on the Request object.
                 req.currentUser = user;
                     } else {
-                message = `Authentication failure on course for the user: ${user.username}`;
+                message = `Authentication failure on course for the user: ${user.emailAddress}`;
             }
         } else {
-          message = `Authentication failure for username: ${user.username}`;
+          message = `Authentication failure for emailAddress: ${user.emailAddress}`;
         }
       } else {
-        message = `User not found for username: ${user.username}`;
+        message = `User not found for emailAddress: ${user.emailAddress}`;
       }
     } else {
       message = 'Auth header not found';
@@ -68,21 +68,21 @@ const bcryptjs = require('bcryptjs');
   
     if (credentials) {
       // Look for a user whose `username` matches the credentials `name` property.
-      const user = await User.findOne({ where: { username: credentials.name } })
+      const user = await User.findOne({ where: { emailAddress: credentials.name } })
       console.log(credentials)
       if (user) {
         const authenticated = bcryptjs
           .compareSync(credentials.pass, user.password);
         if (authenticated) {
-          console.log(`Authentication successful for username: ${user.username}`);
+          console.log(`Authentication successful for emailAddress: ${user.emailAddress}`);
   
           // Store the user on the Request object.
           req.currentUser = user;
         } else {
-          message = `Authentication failure for username: ${user.username}`;
+          message = `Authentication failure for emailAddress: ${user.emailAddress}`;
         }
       } else {
-        message = `User not found for username: ${user.username}`;
+        message = `User not found for emailAddress: ${user.emailAddress}`;
       }
     } else {
       message = 'Auth header not found';
@@ -109,7 +109,7 @@ router.get("/courses", asyncHandler(async (req, res, next) => {
         include: [
             {
                 model: User,
-                attributes: ["id", "name",  "username"]
+                attributes: ["id", "name",  "emailAddress"]
             }
         ]
     });
@@ -207,7 +207,7 @@ router.put("/course/:id", [
 router.delete("/course/:id", courseAuth, asyncHandler(async (req, res, next) => {
     const reqID = req.params.id
     const credentials = auth(req);
-      const user = await User.findOne({ where: { username: credentials.name } })
+      const user = await User.findOne({ where: { emailAddress: credentials.name } })
       if (user) {
         const courses = await Course.destroy({ where: { id: reqID , userId: user.id} })
         if (courses) {
@@ -243,7 +243,7 @@ const users = [];
 router.get('/users', authenticateUser, asyncHandler(async(req, res) => {
     const credentials = auth(req);
     console.log(credentials)
-    const user = await User.findOne({ where: { username: credentials.name } })
+    const user = await User.findOne({ where: { emailAddress: credentials.name } })
         res.json(user).end()
 
   }));
@@ -257,9 +257,9 @@ router.post('/users', [
     check('name')
       .exists({ checkNull: true, checkFalsy: true })
       .withMessage('Please provide a value for "name"'),
-    check('username')
+    check('emailAddress')
       .exists({ checkNull: true, checkFalsy: true })
-      .withMessage('Please provide a value for "username"'),
+      .withMessage('Please provide a value for "emailAddress"'),
     check('password')
       .exists({ checkNull: true, checkFalsy: true })
       .withMessage('Please provide a value for "password"'),

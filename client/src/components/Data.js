@@ -20,7 +20,7 @@ export default class Data {
     }
 
     if (requiresAuth) {    
-      const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
+      const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
       options.headers['Authorization'] = `Basic ${encodedCredentials}`;
     }
     return fetch(url, options);
@@ -29,8 +29,8 @@ export default class Data {
 
 
   //get user api
-  async getUser(username, password) {
-    const response = await this.api(`/users`, 'GET', null, true, { username, password });
+  async getUser(emailAddress, password) {
+    const response = await this.api(`/users`, 'GET', null, true, { emailAddress, password });
     if (response.status === 200) {
       return response.json().then(data => data);
     }
@@ -90,8 +90,8 @@ export default class Data {
   }
 
   //post Course 
-  async createCourse(course, username, password) {
-    const response = await this.api('/course', 'POST', course, true, { username, password });
+  async createCourse(course, emailAddress, password) {
+    const response = await this.api('/course', 'POST', course, true, { emailAddress, password });
     if (response.status === 201) {
       return [];
     }
@@ -106,8 +106,8 @@ export default class Data {
   }
 
   //put course
-async updateCourse(id, course, username, password) {
-  const response = await this.api(`/course/${id}`, 'PUT', course, true, { username, password });
+async updateCourse(id, course, emailAddress, password) {
+  const response = await this.api(`/course/${id}`, 'PUT', course, true, { emailAddress, password });
   if (response.status === 204) {
     return [];
   }
@@ -122,8 +122,8 @@ async updateCourse(id, course, username, password) {
 }
 
 //delete course
-async deleteCourse(id, course, username, password) {
-  const response = await this.api(`/course/${id}`, 'DELETE', course, true, { username, password });
+async deleteCourse(id, course, emailAddress, password) {
+  const response = await this.api(`/course/${id}`, 'DELETE', course, true, { emailAddress, password });
   if (response.status === 204) {
     return [];
   }

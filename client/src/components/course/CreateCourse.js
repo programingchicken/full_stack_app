@@ -148,7 +148,7 @@ console.log(hashPass)
 console.log(name)
 
 //post to API
-        context.data.createCourse(course, user.username, hashPass)
+        context.data.createCourse(course, user.emailAddress, hashPass)
             .then(errors => {
                           //set state errors
                 if (errors.length !== 0) {

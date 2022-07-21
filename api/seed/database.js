@@ -34,12 +34,12 @@ class Database {
     return this.context
       .execute(`
         INSERT INTO Users
-          (name, username, password, createdAt, updatedAt)
+          (name, emailAddress, password, createdAt, updatedAt)
         VALUES
           (?, ?, ?, datetime('now'), datetime('now'));
       `,
       user.name,
-      user.username,
+      user.emailAddress,
       user.password);
   }
 
@@ -98,7 +98,7 @@ class Database {
       CREATE TABLE Users (
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name VARCHAR(255) NOT NULL DEFAULT '', 
-        username VARCHAR(255) NOT NULL DEFAULT '' UNIQUE, 
+        emailAddress VARCHAR(255) NOT NULL DEFAULT '' UNIQUE, 
         password VARCHAR(255) NOT NULL DEFAULT '', 
         createdAt DATETIME NOT NULL, 
         updatedAt DATETIME NOT NULL

@@ -7,7 +7,7 @@ import FormSign from '../FormSign';
 export default class UserSignUp extends Component {
   state = {
     name: '',
-    username: '',
+    emailAddress: '',
     password: '',
     errors: [],
   }
@@ -15,7 +15,7 @@ export default class UserSignUp extends Component {
   render() {
     const {
       name,
-      username,
+      emailAddress,
       password,
       errors,
     } = this.state;
@@ -41,12 +41,12 @@ export default class UserSignUp extends Component {
                   onChange={this.change} 
                   placeholder="Name" />
                 <input 
-                  id="username" 
-                  name="username" 
+                  id="emailAddress" 
+                  name="emailAddress" 
                   type="text"
-                  value={username} 
+                  value={emailAddress} 
                   onChange={this.change} 
-                  placeholder="User Name" />
+                  placeholder="Email Address" />
                 <input 
                   id="password" 
                   name="password"
@@ -80,17 +80,17 @@ export default class UserSignUp extends Component {
     const { context } = this.props;
     const {
       name,
-      username,
+      emailAddress,
       password,
     } = this.state;
 
     // Create user
     const user = {
       name,
-      username,
+      emailAddress,
       password,
     };
-    console.log(user.username)
+    console.log(user.emailAddress)
 
 
 //create the user
@@ -102,8 +102,8 @@ export default class UserSignUp extends Component {
         if (data.length !== 0) {
           this.setState({ errors: data });
       }  else {
-          console.log(`${user.username} is successfully signed up and authenticated!`);
-          context.actions.signIn(user.username, user.password)
+          console.log(`${user.emailAddress} is successfully signed up and authenticated!`);
+          context.actions.signIn(user.emailAddress, user.password)
             .then(() => {
               this.props.history.push('/authenticated');    
             });

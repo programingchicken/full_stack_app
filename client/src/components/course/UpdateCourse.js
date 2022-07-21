@@ -174,7 +174,7 @@ class UpdateCourse extends Component {
 
 
         //put to the API
-        context.data.updateCourse(id, course, user.username, hashPass)
+        context.data.updateCourse(id, course, user.emailAddress, hashPass)
             .then(errors => {
 
             //set state errors

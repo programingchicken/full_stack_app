@@ -178,7 +178,7 @@ console.log(name)
         };
 
         //delete
-        context.data.deleteCourse(id, course, user.username, hashPass)
+        context.data.deleteCourse(id, course, user.emailAddress, hashPass)
             .then(errors => {
 
                //change page

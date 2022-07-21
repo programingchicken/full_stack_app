@@ -2,12 +2,12 @@
   "users": [
     {
       "name": "Smith",
-      "username": "joe@smith.com",
+      "emailAddress": "joe@smith.com",
       "password": "joepassword"
     },
     {
       "name": "Jones",
-      "username": "sally@jones.com",
+      "emailAddress": "sally@jones.com",
       "password": "sallypassword"
     }
   ],

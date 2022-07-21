@@ -14,7 +14,7 @@ exports.authenticateUser = async (req, res, next) => {
     //test if it is true
     if (credentials) {
         //finds the user in the database
-        const user = await User.findOne({ where: { username: credentials.name } })
+        const user = await User.findOne({ where: { emailAddress: credentials.name } })
 
         //if it finds user in database
         if (user) {
@@ -24,15 +24,15 @@ exports.authenticateUser = async (req, res, next) => {
                 .compareSync(credentials.pass, user.password);
             //if compareSync true
             if (authenticated) {
-                console.log(`Authentication successful for emailAddress: ${user.username}`);
+                console.log(`Authentication successful for emailAddress: ${user.emailAddress}`);
                 // Store the user on the Request object.
                 req.currentUser = user;
                 console.log(req.currentUser)
             } else {
-                warningText = `Authentication failure for emailAddress: ${user.username}`;
+                warningText = `Authentication failure for emailAddress: ${user.emailAddress}`;
             }  
         } else {
-            warningText = `User not found for emailAddress: ${credentials.username}`;
+            warningText = `User not found for emailAddress: ${credentials.emailAddress}`;
         }
     } else {
         warningText = 'Auth header not found';
